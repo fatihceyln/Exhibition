@@ -25,12 +25,17 @@ struct PhotoImageView: View {
                         PhotoAttributesView(photo: photo)
                     }
             } else if photoImageViewModel.isLoading {
-                ProgressView()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background {
-                        RoundedRectangle(cornerRadius: 5)
-                            .fill(.ultraThinMaterial)
-                    }
+                if let image = UIImage(blurHash: photo.blurHash ?? "", size: CGSize(width: 32, height: 32)) {
+                    Image(uiImage: image)
+                        .resizable()
+                } else {
+                    ProgressView()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background {
+                            RoundedRectangle(cornerRadius: 5)
+                                .fill(.ultraThinMaterial)
+                        }
+                }
             } else {
                 Image(systemName: "questionmark")
                     .resizable()
