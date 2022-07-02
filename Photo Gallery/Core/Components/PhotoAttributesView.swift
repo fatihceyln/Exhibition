@@ -1,0 +1,41 @@
+//
+//  PhotoAttributesView.swift
+//  Photo Gallery
+//
+//  Created by Fatih Kilit on 2.07.2022.
+//
+
+import SwiftUI
+
+struct PhotoAttributesView: View {
+    let photo: Photo
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            LinearGradient(colors: [.black.opacity(0.3), .clear], startPoint: .bottom, endPoint: .top)
+            HStack {
+                HStack {
+                    ProfileImageView(photo: photo)
+                        .frame(width: 40, height: 40)
+                    
+                    VStack(alignment: .leading) {
+                        Text(photo.user?.name ?? "")
+                        
+                        if photo.sponsorship != nil {
+                            Text("Sponsored by " + (photo.sponsorship?.sponsor?.name ?? ""))
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+                
+                Spacer()
+                
+                Label {
+                    Text("\(photo.likes ?? 0)")
+                } icon: {
+                    Image(systemName: "heart.fill")
+                }
+            }
+            .padding()
+        }
+    }
+}
