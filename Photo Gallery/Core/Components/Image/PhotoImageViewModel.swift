@@ -2,7 +2,7 @@
 //  PhotoImageViewModel.swift
 //  Photo Gallery
 //
-//  Created by Fatih Kilit on 1.07.2022.
+//  Created by Fatih Kilit on 3.07.2022.
 //
 
 import Foundation
@@ -33,5 +33,5 @@ class PhotoImageViewModel: ObservableObject {
             })
             .store(in: &cancellables)
     }
-
+    
 }

@@ -10,7 +10,7 @@ import Combine
 
 class HomeViewModel: ObservableObject {
     @Published var photos: [Photo] = []
-    let service: PhotoService = PhotoService()
+    let randomPhotoService: RandomPhotoService = RandomPhotoService()
     private var cancellable: AnyCancellable? = nil
     
     init() {
@@ -18,7 +18,7 @@ class HomeViewModel: ObservableObject {
     }
     
     private func getPhotos() {
-        cancellable = service.$photos
+        cancellable = randomPhotoService.$photos
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {

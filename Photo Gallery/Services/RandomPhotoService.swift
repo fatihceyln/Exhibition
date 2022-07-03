@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class PhotoService {
+class RandomPhotoService {
     @Published var photos: [Photo] = []
     private var cancellable: AnyCancellable? = nil
     private var page: Int = 1

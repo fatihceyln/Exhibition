@@ -16,8 +16,9 @@ struct HomeView: View {
         TabView {
             ZStack(alignment: .top) {
                 TabView(selection: $selectedTopic) {
-                    ForEach(TopicEnum.allCases) { _ in
-                        mainScrollableView
+                    mainScrollableView
+                    ForEach(TopicEnum.allCases.dropFirst()) { topicEnum in
+                        TopicView(topicEnum: topicEnum)
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
@@ -83,13 +84,13 @@ struct HomeView: View {
             LazyVStack {
                 ForEach(homeViewModel.photos) { photo in
                     ZStack(alignment: .bottomLeading) {
-                        PhotoImageView(photo: photo, homeViewModel: homeViewModel)
+                        PhotoImageView(photo: photo)
                     }
                     .frame(width: UIScreen.main.bounds.width, height: photo.height?.calculateHeight(width: photo.width ?? 0, height: photo.height ?? 0))
                     .onAppear {
                         if homeViewModel.photos.count > 5 {
                             if photo.id == homeViewModel.photos[homeViewModel.photos.count - 2].id {
-                                homeViewModel.service.downloadPhotos()
+                                homeViewModel.randomPhotoService.downloadPhotos()
                             }
                         }
                     }
@@ -97,15 +98,6 @@ struct HomeView: View {
             }
         }
         .ignoresSafeArea(edges: .top)
-    }
-    private func topicScrollableView(topic: TopicEnum) -> some View {
-        ScrollView {
-            LazyVStack {
-                ZStack {
-                    
-                }
-            }
-        }
     }
 }
 

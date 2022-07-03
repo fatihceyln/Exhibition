@@ -2,7 +2,7 @@
 //  PhotoImageView.swift
 //  Photo Gallery
 //
-//  Created by Fatih Kilit on 1.07.2022.
+//  Created by Fatih Kilit on 3.07.2022.
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ struct PhotoImageView: View {
     let photo: Photo
     @StateObject private var photoImageViewModel: PhotoImageViewModel
     
-    init(photo: Photo, homeViewModel: HomeViewModel) {
+    init(photo: Photo) {
         self.photo = photo
         _photoImageViewModel = StateObject(wrappedValue: PhotoImageViewModel(photo: photo))
     }
@@ -39,7 +39,7 @@ struct PhotoImageView: View {
             } else {
                 Image(systemName: "questionmark")
                     .resizable()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)        
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
     }
@@ -47,7 +47,8 @@ struct PhotoImageView: View {
 
 struct PhotoImageView_Previews: PreviewProvider {
     static var previews: some View {
-        PhotoImageView(photo: photo, homeViewModel: HomeViewModel())
+        PhotoImageView(photo: photo)
             .preferredColorScheme(.dark)
     }
 }
+
