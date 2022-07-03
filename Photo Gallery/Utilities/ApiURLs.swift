@@ -19,5 +19,9 @@ class ApiURLs {
     }
     
     static let topics: String = "https://api.unsplash.com/topics?per_page=21&&client_id=HVp3fBJ3w1J6VPVIWpCKaz26lbQUkGTGReu9UC1Q0vg"
+    
+    static func topicPhoto(topic: TopicEnum, page: Int) -> String {
+        return "https://api.unsplash.com/topics/\(topic.topicId)/photos?page=\(page)&&client_id=HVp3fBJ3w1J6VPVIWpCKaz26lbQUkGTGReu9UC1Q0vg"
+    }
 }
 

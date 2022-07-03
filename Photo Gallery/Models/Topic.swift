@@ -31,6 +31,55 @@ enum TopicEnum: String, Identifiable, CaseIterable {
     case artsCulture = "Arts & Culture"
     case history = "History"
     case athletics = "Athletics"
+    
+    var topicId: String {
+        switch self {
+        case .editorial:
+            return ""
+        case .currentEvents:
+            return "BJJMtteDJA4"
+        case .wallpapers:
+            return "bo8jQKTaE0Y"
+        case ._3dRenders:
+            return "CDwuwXJAbEw"
+        case .texturesPatterns:
+            return "iUIsnVtjB0Y"
+        case .experimental:
+            return "qPYsDzvJOYc"
+        case .architecture:
+            return "rnSKDHwwYUk"
+        case .nature:
+            return "6sMVjTLSkeQ"
+        case .businessWork:
+            return "aeu6rL-j6ew"
+        case .fashion:
+            return "S4MKLAsBB74"
+        case .film:
+            return "hmenvQhUmxM"
+        case .foodDrink:
+            return "xjPR4hlkBGA"
+        case .healthWelness:
+            return "_hb-dl4Q-4U"
+        case .people:
+            return "towJZFskpGg"
+        case .interiors:
+            return "R_Fyn-Gwtlw"
+        case .streetPhotography:
+            return "xHxYTMHLgOc"
+        case .travel:
+            return "Fzo3zuOHN6w"
+        case .animals:
+            return "Jpg6Kidl-Hk"
+        case .spirituality:
+            return "_8zFHuhRhyo"
+        case .artsCulture:
+            return "bDo48cUhwnY"
+        case .history:
+            return "dijpbw99kQQ"
+        case .athletics:
+            return "Bn-DjrcBrwo"
+        }
+    }
 }
 
 struct Topic: Codable, Identifiable {

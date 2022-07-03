@@ -10,19 +10,72 @@ import SwiftUI
 struct HomeView: View {
     
     @StateObject private var homeViewModel: HomeViewModel = HomeViewModel()
+    @State private var selectedTopic: TopicEnum = .editorial
     
     var body: some View {
         TabView {
-            mainScrollableView
-                .tabItem {
-                    Label("Home", systemImage: "house.fill")
+            ZStack(alignment: .top) {
+                TabView(selection: $selectedTopic) {
+                    ForEach(TopicEnum.allCases) { _ in
+                        mainScrollableView
+                    }
                 }
+                .tabViewStyle(.page(indexDisplayMode: .never))
+                .ignoresSafeArea()
+                
+                selectableTopics
+                    .background {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(.gray)
+                            .frame(height: 2)
+                            .frame(maxHeight: .infinity, alignment: .bottom)
+                    }
+            }
+            .tabItem {
+                Label("Home", systemImage: "house.fill")
+            }
             
             ProfileView()
                 .tabItem {
                     Label("Profile", systemImage: "person.fill")
                 }
         }
+    }
+    
+    private var selectableTopics: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            ScrollViewReader { proxy in
+                HStack {
+                    ForEach(TopicEnum.allCases) { topic in
+                        Text(topic.rawValue)
+                            .font(.title3.bold())
+                            .tag(topic)
+                            .padding(.horizontal, 5)
+                            .padding(.bottom, 5)
+                            .background {
+                                if selectedTopic == topic {
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .fill(.white)
+                                        .frame(height: 3)
+                                        .frame(maxHeight: .infinity, alignment: .bottom)
+                                        .padding(.horizontal, 3)
+                                }
+                            }
+                            .onTapGesture {
+                                selectedTopic = topic
+                                print("a")
+                            }
+                    }
+                }
+                .padding(.horizontal)
+                .onChange(of: selectedTopic) { value in
+                    withAnimation(.easeInOut) {
+                        proxy.scrollTo(value, anchor: .bottom)
+                    }
+                }
+            }
+        }
+        .background(.white.opacity(0.000001))
     }
     
     private var mainScrollableView: some View {
@@ -45,10 +98,20 @@ struct HomeView: View {
         }
         .ignoresSafeArea(edges: .top)
     }
+    private func topicScrollableView(topic: TopicEnum) -> some View {
+        ScrollView {
+            LazyVStack {
+                ZStack {
+                    
+                }
+            }
+        }
+    }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .preferredColorScheme(.dark)
     }
 }
