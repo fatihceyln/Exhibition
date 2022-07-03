@@ -26,6 +26,8 @@
 		3DB473912870483200448685 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB473902870483200448685 /* ProfileView.swift */; };
 		3DB473932870489000448685 /* AccountSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB473922870489000448685 /* AccountSettingsView.swift */; };
 		3DB4739528704A4A00448685 /* PhotoAttributesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB4739428704A4A00448685 /* PhotoAttributesView.swift */; };
+		3DD89C422871A875002547B5 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD89C412871A875002547B5 /* Topic.swift */; };
+		3DD89C442871AC62002547B5 /* TopicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD89C432871AC62002547B5 /* TopicService.swift */; };
 		3DE997DE2870BE0500703AA2 /* BlurHashDecode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE997DD2870BE0500703AA2 /* BlurHashDecode.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +52,8 @@
 		3DB473902870483200448685 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		3DB473922870489000448685 /* AccountSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsView.swift; sourceTree = "<group>"; };
 		3DB4739428704A4A00448685 /* PhotoAttributesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAttributesView.swift; sourceTree = "<group>"; };
+		3DD89C412871A875002547B5 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
+		3DD89C432871AC62002547B5 /* TopicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicService.swift; sourceTree = "<group>"; };
 		3DE997DD2870BE0500703AA2 /* BlurHashDecode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurHashDecode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,6 +122,7 @@
 			children = (
 				3D4617BE286F2ACC006E0E4B /* PhotoService.swift */,
 				3D4617C6286F2F47006E0E4B /* ImageService.swift */,
+				3DD89C432871AC62002547B5 /* TopicService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -126,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				3D4617B8286F2847006E0E4B /* Photo.swift */,
+				3DD89C412871A875002547B5 /* Topic.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -143,8 +149,8 @@
 		3D4617C2286F2CEA006E0E4B /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				3D4617B2286F27DA006E0E4B /* HomeView.swift */,
 				3D4617C3286F2CF4006E0E4B /* HomeViewModel.swift */,
+				3D4617B2286F27DA006E0E4B /* HomeView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -276,11 +282,13 @@
 				3D4617BF286F2ACC006E0E4B /* PhotoService.swift in Sources */,
 				3D4617BB286F28B6006E0E4B /* NetworkingManager.swift in Sources */,
 				3DE997DE2870BE0500703AA2 /* BlurHashDecode.swift in Sources */,
+				3DD89C422871A875002547B5 /* Topic.swift in Sources */,
 				3D4617A5286F268A006E0E4B /* Photo_GalleryApp.swift in Sources */,
 				3DB473852870320800448685 /* ProfileImageViewModel.swift in Sources */,
 				3D4617B3286F27DA006E0E4B /* HomeView.swift in Sources */,
 				3DB4739528704A4A00448685 /* PhotoAttributesView.swift in Sources */,
 				3DB473932870489000448685 /* AccountSettingsView.swift in Sources */,
+				3DD89C442871AC62002547B5 /* TopicService.swift in Sources */,
 				3D4617C9286F307D006E0E4B /* PhotoImageViewModel.swift in Sources */,
 				3DB4738A2870351200448685 /* PreviewProvider.swift in Sources */,
 			);

@@ -18,7 +18,7 @@ class PhotoService {
     }
     
     func downloadPhotos() {
-        guard let url = URL(string: ApiURLs.editorialPhoto(byPage: page)) else {return}
+        guard let url = URL(string: ApiURLs.editorial(byPage: page)) else {return}
         page += 1
         
         cancellable = NetworkingManager.shared.download(url: url)

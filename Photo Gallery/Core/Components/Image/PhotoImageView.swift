@@ -25,7 +25,7 @@ struct PhotoImageView: View {
                         PhotoAttributesView(photo: photo)
                     }
             } else if photoImageViewModel.isLoading {
-                if let image = UIImage(blurHash: photo.blurHash ?? "", size: CGSize(width: 32, height: 32)) {
+                if let image = UIImage(blurHash: photo.blurHash ?? "", size: CGSize(width: 32, height: 32), punch: 0.5) {
                     Image(uiImage: image)
                         .resizable()
                 } else {
