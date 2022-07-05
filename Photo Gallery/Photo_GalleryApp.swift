@@ -13,7 +13,7 @@ struct Photo_GalleryApp: App {
     init() {
         let appearance = UITabBarAppearance()
         appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
-        appearance.backgroundColor = UIColor(Color.black.opacity(0.3))
+        appearance.backgroundColor = UIColor(Color.black.opacity(0.5))
         
         // Use this appearance when scrolling behind the TabView:
         UITabBar.appearance().standardAppearance = appearance

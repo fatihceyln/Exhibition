@@ -9,7 +9,7 @@ import Foundation
 
 class ApiURLs {
     
-    static let apiKey: String = "t1WzXoN8EXln8m6CpZJAhFXrZWsSMdiJ-1qN8yjkgn0"
+    static let apiKey: String = "ma8Zk0gXKPNNBN9q4m77BG657O7twbtoQY7y2c-2LQs"
     
     static let baseURL: String = "https://api.unsplash.com/"
     

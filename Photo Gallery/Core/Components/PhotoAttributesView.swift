@@ -13,19 +13,27 @@ struct PhotoAttributesView: View {
         ZStack(alignment: .bottom) {
             LinearGradient(colors: [.black.opacity(0.3), .clear], startPoint: .bottom, endPoint: .top)
             HStack {
-                HStack {
-                    ProfileImageView(photo: photo)
-                        .frame(width: 40, height: 40)
-                    
-                    VStack(alignment: .leading) {
-                        Text(photo.user?.name ?? "")
+                // MARK: Go user profile
+                
+                NavigationLink {
+                    UserProfileView(user: photo.user!)
+                } label: {
+                    HStack {
+                        ProfileImageView(photo: photo)
+                            .frame(width: 40, height: 40)
                         
-                        if photo.sponsorship != nil {
-                            Text("Sponsored by " + (photo.sponsorship?.sponsor?.name ?? ""))
-                                .foregroundColor(.secondary)
+                        VStack(alignment: .leading) {
+                            Text(photo.user?.name ?? "")
+                            
+                            if photo.sponsorship != nil {
+                                Text("Sponsored by " + (photo.sponsorship?.sponsor?.name ?? ""))
+                                    .foregroundColor(.secondary)
+                            }
                         }
                     }
+                    .foregroundColor(.white)
                 }
+
                 
                 Spacer()
                 

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3D0A03552874B43E005111FF /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0A03542874B43E005111FF /* PhotoService.swift */; };
+		3D0A03582874C00C005111FF /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0A03572874C00C005111FF /* UserProfileViewModel.swift */; };
+		3D0A035A2874C014005111FF /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0A03592874C014005111FF /* UserProfileView.swift */; };
 		3D4617A5286F268A006E0E4B /* Photo_GalleryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4617A4286F268A006E0E4B /* Photo_GalleryApp.swift */; };
 		3D4617A9286F268A006E0E4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D4617A8286F268A006E0E4B /* Assets.xcassets */; };
 		3D4617AC286F268A006E0E4B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D4617AB286F268A006E0E4B /* Preview Assets.xcassets */; };
@@ -34,6 +36,8 @@
 
 /* Begin PBXFileReference section */
 		3D0A03542874B43E005111FF /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
+		3D0A03572874C00C005111FF /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
+		3D0A03592874C014005111FF /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		3D4617A1286F268A006E0E4B /* Photo Gallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Gallery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D4617A4286F268A006E0E4B /* Photo_GalleryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo_GalleryApp.swift; sourceTree = "<group>"; };
 		3D4617A8286F268A006E0E4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -70,6 +74,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D0A03562874C002005111FF /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				3D0A03572874C00C005111FF /* UserProfileViewModel.swift */,
+				3D0A03592874C014005111FF /* UserProfileView.swift */,
+			);
+			path = UserProfile;
+			sourceTree = "<group>";
+		};
 		3D461798286F2689006E0E4B = {
 			isa = PBXGroup;
 			children = (
@@ -122,8 +135,8 @@
 		3D4617B5286F27EE006E0E4B /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				3D4617C6286F2F47006E0E4B /* ImageService.swift */,
 				3D0A03542874B43E005111FF /* PhotoService.swift */,
+				3D4617C6286F2F47006E0E4B /* ImageService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -186,8 +199,9 @@
 		3DB4738B287039DE00448685 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				3DF2CBFC2871FE4F00DFB06D /* Image */,
+				3D0A03562874C002005111FF /* UserProfile */,
 				3DB4739428704A4A00448685 /* PhotoAttributesView.swift */,
+				3DF2CBFC2871FE4F00DFB06D /* Image */,
 				3D72D7312871F8C700EF3F6A /* Topic */,
 				3DB47383287031F500448685 /* ProfileImage */,
 			);
@@ -287,6 +301,7 @@
 				3D4617B9286F2847006E0E4B /* Photo.swift in Sources */,
 				3D4617BD286F2AAF006E0E4B /* ApiURLs.swift in Sources */,
 				3D4617C4286F2CF4006E0E4B /* HomeViewModel.swift in Sources */,
+				3D0A03582874C00C005111FF /* UserProfileViewModel.swift in Sources */,
 				3DB4738F2870407500448685 /* Double.swift in Sources */,
 				3DB473912870483200448685 /* ProfileView.swift in Sources */,
 				3DF2CBFE2871FE5C00DFB06D /* PhotoImageViewModel.swift in Sources */,
@@ -295,6 +310,7 @@
 				3DD89C422871A875002547B5 /* Topic.swift in Sources */,
 				3D72D7332871F8E000EF3F6A /* TopicViewModel.swift in Sources */,
 				3D72D7352871F9A400EF3F6A /* TopicView.swift in Sources */,
+				3D0A035A2874C014005111FF /* UserProfileView.swift in Sources */,
 				3DF2CC002871FE7900DFB06D /* PhotoImageView.swift in Sources */,
 				3D4617A5286F268A006E0E4B /* Photo_GalleryApp.swift in Sources */,
 				3DB473852870320800448685 /* ProfileImageViewModel.swift in Sources */,

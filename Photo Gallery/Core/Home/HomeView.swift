@@ -31,6 +31,11 @@ struct HomeView: View {
                             .frame(height: 2)
                             .frame(maxHeight: .infinity, alignment: .bottom)
                     }
+                    .background {
+                        Rectangle()
+                            .fill(Color.black.opacity(0.5))
+                            .edgesIgnoringSafeArea(.top)
+                    }
             }
             .tabItem {
                 Label("Home", systemImage: "house.fill")
@@ -64,7 +69,6 @@ struct HomeView: View {
                             }
                             .onTapGesture {
                                 selectedTopic = topic
-                                print("a")
                             }
                     }
                 }
@@ -76,7 +80,6 @@ struct HomeView: View {
                 }
             }
         }
-        .background(.white.opacity(0.000001))
     }
     
     private var mainScrollableView: some View {

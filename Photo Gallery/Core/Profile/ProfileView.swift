@@ -74,7 +74,7 @@ struct ProfileView: View {
                     }
                 }
             }
-        }
+        }	
         .sheet(isPresented: $showAccountSettings) {
             AccountSettingsView()
         }

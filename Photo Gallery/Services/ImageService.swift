@@ -36,7 +36,7 @@ class ImageService {
         
         switch options {
         case .photo:
-            urlString = photo.urls?.regular
+            urlString = photo.urls?.small
         case .profile:
             urlString = photo.user?.profileImage?.medium
         }
