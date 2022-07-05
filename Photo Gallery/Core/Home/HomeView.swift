@@ -80,7 +80,7 @@ struct HomeView: View {
     }
     
     private var mainScrollableView: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             LazyVStack {
                 ForEach(homeViewModel.photos) { photo in
                     ZStack(alignment: .bottomLeading) {
@@ -90,7 +90,7 @@ struct HomeView: View {
                     .onAppear {
                         if homeViewModel.photos.count > 5 {
                             if photo.id == homeViewModel.photos[homeViewModel.photos.count - 2].id {
-                                homeViewModel.randomPhotoService.downloadPhotos()
+                                homeViewModel.photoService.downloadPhotos()
                             }
                         }
                     }

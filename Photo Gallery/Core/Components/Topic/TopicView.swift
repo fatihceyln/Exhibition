@@ -16,7 +16,7 @@ struct TopicView: View {
     }
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             LazyVStack {
                 ForEach(topicViewModel.photos) { photo in
                     ZStack(alignment: .bottomLeading) {
@@ -26,7 +26,7 @@ struct TopicView: View {
                     .onAppear {
                         if topicViewModel.photos.count > 5 {
                             if photo.id == topicViewModel.photos[topicViewModel.photos.count - 2].id {
-                                topicViewModel.topicPhotoService.downloadTopicPhoto()
+                                topicViewModel.photoService.downloadPhotos()
                             }
                         }
                     }
