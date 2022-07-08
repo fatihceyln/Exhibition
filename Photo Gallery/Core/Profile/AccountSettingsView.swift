@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct AccountSettingsView: View {
+    
+    @Binding var showAccountSettings: Bool
+    
     var body: some View {
         VStack {
             Section {
@@ -46,6 +49,16 @@ struct AccountSettingsView: View {
                     .font(.title2)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.top)
+                    .overlay(alignment: .bottomLeading) {
+                        Button {
+                            showAccountSettings = false
+                        } label: {
+                            Image(systemName: "xmark.app")
+                        }
+                        .padding(.leading)
+                        .font(.title)
+                        .foregroundColor(.white)
+                    }
             }
             
             Form {
@@ -63,6 +76,6 @@ struct AccountSettingsView: View {
 
 struct AccountSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountSettingsView()
+        AccountSettingsView(showAccountSettings: .constant(true))
     }
 }

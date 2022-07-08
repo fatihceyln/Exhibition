@@ -9,6 +9,9 @@ import SwiftUI
 
 struct UserProfileView: View {
     let user: User
+    
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
         VStack {
             Rectangle()
@@ -23,13 +26,14 @@ struct UserProfileView: View {
                 .clipped()
                 .overlay(alignment: .topLeading) {
                     Button {
-                        
+                        dismiss()
                     } label: {
                         Image(systemName: "chevron.left")
                             .foregroundColor(.white)
                             .font(.title2)
                     }
                     .padding()
+                    .padding(.top, 30)
                 }
                 .overlay(alignment: .topTrailing) {
                     Button {
@@ -40,6 +44,7 @@ struct UserProfileView: View {
                             .font(.title2)
                     }
                     .padding()
+                    .padding(.top, 30)
                 }
                 .overlay(alignment: .bottomTrailing) {
                     Image("pp")
@@ -66,6 +71,8 @@ struct UserProfileView: View {
                 
             }
         }
+        .ignoresSafeArea()
+        .navigationBarHidden(true)
     }
     
     private func share() {

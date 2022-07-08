@@ -39,13 +39,14 @@ struct ProfileView: View {
                 .overlay(alignment: .topLeading) {
                     Image(systemName: "chart.line.uptrend.xyaxis")
                         .padding()
+                        .padding(.top, 30)
                 }
                 .font(.title2)
                 .overlay(alignment: .topTrailing) {
-                    HStack(spacing: 15) {
+                    HStack(alignment: .bottom, spacing: 15) {
                         Menu {
                             Button("Account Settings") {
-                                showAccountSettings.toggle()
+                                showAccountSettings = true
                             }
                             Button("Log Out") {}
                         } label: {
@@ -59,9 +60,9 @@ struct ProfileView: View {
                             Image(systemName: "square.and.arrow.up")
                                 .foregroundColor(Color.white)
                         }
-
                     }
                     .padding()
+                    .padding(.top, 30)
                     .font(.title2)
                 }
             
@@ -74,9 +75,10 @@ struct ProfileView: View {
                     }
                 }
             }
-        }	
+        }
+        .ignoresSafeArea()
         .sheet(isPresented: $showAccountSettings) {
-            AccountSettingsView()
+            AccountSettingsView(showAccountSettings: $showAccountSettings)
         }
     }
     

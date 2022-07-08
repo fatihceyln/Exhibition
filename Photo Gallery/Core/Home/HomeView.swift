@@ -14,28 +14,33 @@ struct HomeView: View {
     
     var body: some View {
         TabView {
-            ZStack(alignment: .top) {
-                TabView(selection: $selectedTopic) {
-                    mainScrollableView
-                    ForEach(TopicEnum.allCases.dropFirst()) { topicEnum in
-                        TopicView(topicEnum: topicEnum)
+            NavigationView {
+                ZStack(alignment: .top) {
+                    ScrollView(.init()) {
+                        TabView(selection: $selectedTopic) {
+                            mainScrollableView
+                            ForEach(TopicEnum.allCases.dropFirst()) { topicEnum in
+                                TopicView(topicEnum: topicEnum)
+                            }
+                        }
+                        .tabViewStyle(.page(indexDisplayMode: .never))
                     }
+                    .ignoresSafeArea()
+                    
+                    selectableTopics
+                        .background {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(.gray)
+                                .frame(height: 2)
+                                .frame(maxHeight: .infinity, alignment: .bottom)
+                        }
+                        .background {
+                            Rectangle()
+                                .fill(Color.black.opacity(0.5))
+                                .edgesIgnoringSafeArea(.top)
+                        }
                 }
-                .tabViewStyle(.page(indexDisplayMode: .never))
-                .ignoresSafeArea()
-                
-                selectableTopics
-                    .background {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(.gray)
-                            .frame(height: 2)
-                            .frame(maxHeight: .infinity, alignment: .bottom)
-                    }
-                    .background {
-                        Rectangle()
-                            .fill(Color.black.opacity(0.5))
-                            .edgesIgnoringSafeArea(.top)
-                    }
+                .navigationBarHidden(true)
             }
             .tabItem {
                 Label("Home", systemImage: "house.fill")
