@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UserProfileView: View {
-    let user: User
+    let photo: Photo
     
     @Environment(\.dismiss) private var dismiss
     
@@ -18,10 +18,11 @@ struct UserProfileView: View {
                 .fill(Color.black.opacity(0.3))
                 .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.25)
                 .background {
-                    Image("bg")
-                        .resizable()
+                    
+                    PhotoImageView(photo: photo, showAttributes: false)
                         .scaledToFill()
-                        .blur(radius: 2)
+                        .opacity(0.6)
+                        .blur(radius: 20)
                 }
                 .clipped()
                 .overlay(alignment: .topLeading) {
@@ -47,22 +48,32 @@ struct UserProfileView: View {
                     .padding(.top, 30)
                 }
                 .overlay(alignment: .bottomTrailing) {
-                    Image("pp")
-                        .resizable()
+                    ProfileImageView(photo: photo)
                         .frame(width: 80, height: 80)
                         .clipShape(Circle())
+                        .background {
+                            Circle()
+                                .stroke(Color.white, lineWidth: 3)
+                        }
                         .padding()
+                        
                 }
                 .overlay(alignment: .bottomLeading) {
                     VStack(alignment: .leading) {
-                        Text(user.name ?? "")
+                        Text(photo.user?.name ?? "")
                             .font(.title)
                         
-                        Label(user.location ?? "", systemImage: "map.fill")
-                        Label(user.bio ?? "", systemImage: "globe")
-                            .frame(width: UIScreen.main.bounds.width * 0.5)
-                            .lineLimit(1)
+                        if let location = photo.user?.location {
+                            Label(location, systemImage: "mappin.and.ellipse")
+                        }
+                        
+                        if let bio = photo.user?.bio {
+                            Label(bio, systemImage: "globe")
+                                .customProfileLableStlye( titleFont: .caption)
+                                .lineLimit(3)
+                        }
                     }
+                    .frame(width: UIScreen.main.bounds.width * 0.7, alignment: .leading)
                     .foregroundColor(.white)
                     .padding()
                 }
@@ -76,7 +87,7 @@ struct UserProfileView: View {
     }
     
     private func share() {
-        guard let url = URL(string: "https://unsplash.com") else {return}
+        guard let url = URL(string: photo.user?.portfolioURL ?? "https://unsplash.com") else {return}
         
         let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         
@@ -91,8 +102,28 @@ struct UserProfileView: View {
     }
 }
 
+struct CustomProfileLabelStyle: LabelStyle {
+    let titleFont: Font
+    
+    func makeBody(configuration: Configuration) -> some View {
+        HStack(alignment: .top) {
+            configuration.icon
+            
+            configuration.title
+                .font(titleFont)
+        }
+    }
+}
+
+extension View {
+    func customProfileLableStlye(titleFont: Font) -> some View {
+        self
+            .labelStyle(CustomProfileLabelStyle(titleFont: titleFont))
+    }
+}
+
 struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfileView(user: photo.user!)
+        UserProfileView(photo: photo)
     }
 }

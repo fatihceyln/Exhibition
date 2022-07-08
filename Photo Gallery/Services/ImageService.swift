@@ -38,7 +38,7 @@ class ImageService {
         case .photo:
             urlString = photo.urls?.small
         case .profile:
-            urlString = photo.user?.profileImage?.medium
+            urlString = photo.user?.profileImage?.large
         }
         
         guard let urlString = urlString else {return}

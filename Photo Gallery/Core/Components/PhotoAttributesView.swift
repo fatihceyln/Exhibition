@@ -16,7 +16,7 @@ struct PhotoAttributesView: View {
                 // MARK: Go user profile
                 
                 NavigationLink {
-                    UserProfileView(user: photo.user!)
+                    UserProfileView(photo: photo)
                 } label: {
                     HStack {
                         ProfileImageView(photo: photo)

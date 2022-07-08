@@ -10,10 +10,11 @@ import SwiftUI
 struct PhotoImageView: View {
     let photo: Photo
     @StateObject private var photoImageViewModel: PhotoImageViewModel
-    
-    init(photo: Photo) {
+    private let showAttributes: Bool
+    init(photo: Photo, showAttributes: Bool = true) {
         self.photo = photo
         _photoImageViewModel = StateObject(wrappedValue: PhotoImageViewModel(photo: photo))
+        self.showAttributes = showAttributes
     }
     
     var body: some View {
@@ -22,7 +23,9 @@ struct PhotoImageView: View {
                 Image(uiImage: image)
                     .resizable()
                     .overlay {
-                        PhotoAttributesView(photo: photo)
+                        if showAttributes {
+                            PhotoAttributesView(photo: photo)
+                        }
                     }
             } else if photoImageViewModel.isLoading {
                 if let image = UIImage(blurHash: photo.blurHash ?? "", size: CGSize(width: 32, height: 32), punch: 0.5) {

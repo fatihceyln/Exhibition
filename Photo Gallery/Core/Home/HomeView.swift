@@ -16,7 +16,7 @@ struct HomeView: View {
         TabView {
             NavigationView {
                 ZStack(alignment: .top) {
-                    ScrollView(.init()) {
+                    ScrollView(.init()) { // It's must if you want to use ignoreSafeArea
                         TabView(selection: $selectedTopic) {
                             mainScrollableView
                             ForEach(TopicEnum.allCases.dropFirst()) { topicEnum in

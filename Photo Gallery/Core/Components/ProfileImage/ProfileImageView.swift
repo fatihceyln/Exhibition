@@ -23,12 +23,17 @@ struct ProfileImageView: View {
                 Image(uiImage: image)
                     .resizable()
             } else if profileImageViewModel.isLoading {
-                ProgressView()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background {
-                        RoundedRectangle(cornerRadius: 5)
-                            .fill(.ultraThinMaterial)
-                    }
+                if let image = UIImage(blurHash: photo.blurHash ?? "", size: CGSize(width: 32, height: 32), punch: 0.5) {
+                    Image(uiImage: image)
+                        .resizable()
+                } else {
+                    ProgressView()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background {
+                            RoundedRectangle(cornerRadius: 5)
+                                .fill(.ultraThinMaterial)
+                        }
+                }
             } else {
                 Image(systemName: "questionmark")
                     .resizable()

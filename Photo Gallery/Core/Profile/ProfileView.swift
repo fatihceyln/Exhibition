@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     
+    private let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @State private var showAccountSettings: Bool = false
     
     var body: some View {
@@ -20,6 +21,7 @@ struct ProfileView: View {
                     Image("bg")
                         .resizable()
                         .scaledToFill()
+                        .opacity(0.6)
                         .blur(radius: 2)
                 }
                 .clipped()
@@ -67,12 +69,8 @@ struct ProfileView: View {
                 }
             
             ScrollView(showsIndicators: false) {
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]) {
-                    ForEach(0..<25, id: \.self) { _ in
-                        Image("bg")
-                            .resizable()
-                            .scaledToFit()
-                    }
+                LazyVGrid(columns: columns) {
+                    
                 }
             }
         }
