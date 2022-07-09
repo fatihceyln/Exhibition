@@ -19,26 +19,49 @@ class ImageService {
     private let photo: Photo
     private let options: ImageOptions
     
+    private let cacheManager: CacheManager = CacheManager.shared
+    
     init(photo: Photo, options: ImageOptions) {
         self.photo = photo
         self.options = options
-        downloadImage()
-        print("INIT service")
+        getImage()
+        //print("INIT service")
     }
     
     deinit {
-        print("DEINIT service")
+        //print("DEINIT service")
+    }
+    
+    private func getImage() {
+        var photoId: String? = ""
+        
+        switch options {
+        case .photo:
+            photoId = photo.id
+        case .profile:
+            photoId = photo.user?.id
+        }
+        
+        if let photoId = photoId, let cachedImage = cacheManager.getImage(id: photoId) {
+            print("RETREIVED: \(photoId)")
+            self.image = cachedImage
+        } else {
+            downloadImage()
+        }
     }
     
     private func downloadImage() {
         
         var urlString: String? = ""
+        var photoId: String? = ""
         
         switch options {
         case .photo:
             urlString = photo.urls?.small
+            photoId = photo.id
         case .profile:
             urlString = photo.user?.profileImage?.large
+            photoId = photo.user?.id
         }
         
         guard let urlString = urlString else {return}
@@ -59,6 +82,10 @@ class ImageService {
                 }
             }, receiveValue: { [weak self] returnedImage in
                 self?.image = returnedImage
+                if let photoId = photoId, let image = returnedImage {
+                    print("DOWNLOADED: \(photoId)")
+                    self?.cacheManager.addImage(image: image, id: photoId)
+                }
                 self?.cancellable?.cancel()
             })
     }
