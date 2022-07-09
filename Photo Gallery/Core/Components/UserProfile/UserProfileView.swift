@@ -7,11 +7,15 @@
 
 import SwiftUI
 
+enum UserProfileContent {
+    case photos, likes, collections
+}
+
 struct UserProfileView: View {
     let photo: Photo
     @Environment(\.dismiss) private var dismiss
     @StateObject private var userProfileViewModel: UserProfileViewModel
-    @State private var showPortfolio: Bool = false
+    @State private var userProfileContent: UserProfileContent = .photos
     
     init(photo: Photo) {
         self.photo = photo
@@ -84,19 +88,42 @@ struct UserProfileView: View {
                     .padding()
                 }
             
-            ScrollView(showsIndicators: false) {
-                LazyVStack {
-                    ForEach(userProfileViewModel.photos) { photo in
-                        ZStack {
-                            PhotoImageView(photo: photo, showAttributes: false)
-                        }
-                        .frame(width: UIScreen.main.bounds.width, height: photo.height?.calculateHeight(width: photo.width ?? 0, height: photo.height ?? 0))
-                        .onAppear {
-                            if userProfileViewModel.photos[userProfileViewModel.photos.count - 2].id == photo.id {
-                                userProfileViewModel.photoService.downloadPhotos()
+            Picker("asdasd", selection: $userProfileContent) {
+                Text("Photos")
+                    .tag(UserProfileContent.photos)
+                
+                Text("Likes")
+                    .tag(UserProfileContent.likes)
+                
+                Text("Collections")
+                    .tag(UserProfileContent.collections)
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            
+            if userProfileContent == .photos {
+                ScrollView(showsIndicators: false) {
+                    LazyVStack {
+                        ForEach(userProfileViewModel.photos) { photo in
+                            ZStack {
+                                PhotoImageView(photo: photo, showAttributes: false)
+                            }
+                            .frame(width: UIScreen.main.bounds.width, height: photo.height?.calculateHeight(width: photo.width ?? 0, height: photo.height ?? 0))
+                            .onAppear {
+                                if userProfileViewModel.photos[userProfileViewModel.photos.count - 2].id == photo.id {
+                                    userProfileViewModel.photoService.downloadPhotos()
+                                }
                             }
                         }
                     }
+                }
+            }
+            else if userProfileContent == .likes {
+                ScrollView {
+                    
+                }
+            } else {
+                ScrollView {
+                    
                 }
             }
         }
