@@ -28,6 +28,7 @@ class TopicService {
                 
             }, receiveValue: { [weak self] returnedTopic in
                 self?.topic = returnedTopic
+                self?.cancellable?.cancel()
             })
     }
 }

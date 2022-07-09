@@ -106,6 +106,7 @@ struct HomeView: View {
                 if let randomPhoto = homeViewModel.randomPhoto {
                     ZStack {
                         PhotoImageView(photo: randomPhoto, showAttributes: false)
+                            .scaledToFill()
                             .overlay {
                                 Color.black.opacity(0.3)
                             }
@@ -124,6 +125,7 @@ struct HomeView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .frame(height: 250)
+                    .clipped()
                 }
                 
                 ForEach(homeViewModel.photos) { photo in

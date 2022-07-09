@@ -53,7 +53,7 @@ struct AccountSettingsView: View {
                         Button {
                             showAccountSettings = false
                         } label: {
-                            Image(systemName: "xmark.app")
+                            Image(systemName: "xmark")
                         }
                         .padding(.leading)
                         .font(.title)
