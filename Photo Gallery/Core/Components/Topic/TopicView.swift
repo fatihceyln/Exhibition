@@ -12,12 +12,55 @@ struct TopicView: View {
     @StateObject private var topicViewModel: TopicViewModel
     
     init(topicEnum: TopicEnum) {
-        self._topicViewModel = StateObject(wrappedValue: TopicViewModel(topicEnum: topicEnum))
+        self._topicViewModel = StateObject(wrappedValue: TopicViewModel(topicEnum: topicEnum, id: topicEnum.topicId))
     }
     
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack {
+                if let topic = topicViewModel.topic {
+                    ZStack(alignment: .topLeading) {
+                        if let image = UIImage(blurHash: topic.coverPhoto?.blurHash ?? "", size: CGSize(width: 32, height: 32), punch: 0.8) {
+                            Image(uiImage: image)
+                                .resizable()
+                                .overlay(content: {
+                                    Color.black.opacity(0.5)
+                                })
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 20) {
+                            Text(topic.title ?? "")
+                                .font(.title2)
+                                .bold()
+                            
+                            Text(topic.description?.trimmingCharacters(in: .newlines) ?? "")
+                                .font(.caption)
+                            
+                            Button {
+                                
+                            } label: {
+                                Text("Submit a photo")
+                                    .foregroundColor(.black)
+                                    .padding(.vertical, 5)
+                                    .padding(.horizontal, 10)
+                                    .background {
+                                        Color.white
+                                    }
+                                    .cornerRadius(5)
+                            }
+                            .frame(maxHeight: .infinity, alignment: .bottom)
+                            .padding(.bottom, 30)
+                        }
+                        .foregroundColor(.white)
+                        .padding(.top, 100)
+                        .padding(.horizontal)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 280)
+                } else {
+                    EmptyView()
+                }
+                
                 ForEach(topicViewModel.photos) { photo in
                     ZStack(alignment: .bottomLeading) {
                         PhotoImageView(photo: photo)

@@ -11,16 +11,20 @@ import SwiftUI
 
 class TopicViewModel: ObservableObject {
     @Published var photos: [Photo] = []
+    @Published var topic: Topic? = nil
     let photoService: PhotoService
-    private var cancellable: AnyCancellable? = nil
+    let topicService: TopicService
+    private var cancellablePhoto: AnyCancellable? = nil
+    private var cancellableTopic: AnyCancellable? = nil
     
-    init(topicEnum: TopicEnum) {
+    init(topicEnum: TopicEnum, id: String) {
         self.photoService = PhotoService(topicEnum: topicEnum)
+        self.topicService = TopicService(id: id)
         addSubscribers()
     }
     
     private func addSubscribers() {
-        cancellable = photoService.$photos
+        cancellablePhoto = photoService.$photos
             .receive(on: DispatchQueue.main)
             .sink { _ in
                 
@@ -32,5 +36,12 @@ class TopicViewModel: ObservableObject {
                 }
             }
 
+        cancellableTopic = topicService.$topic
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in
+                
+            }, receiveValue: { [weak self] returnedTopic in
+                self?.topic = returnedTopic
+            })
     }
 }
