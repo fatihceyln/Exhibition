@@ -28,13 +28,14 @@ struct TopicView: View {
                                 })
                         }
                         
-                        VStack(alignment: .leading, spacing: 20) {
+                        VStack(alignment: .leading, spacing: 10) {
                             Text(topic.title ?? "")
                                 .font(.title2)
                                 .bold()
                             
                             Text(topic.description?.trimmingCharacters(in: .newlines) ?? "")
                                 .font(.caption)
+                                .lineLimit(3)
                             
                             Button {
                                 
@@ -56,7 +57,7 @@ struct TopicView: View {
                         .padding(.horizontal)
                     }
                     .frame(maxWidth: .infinity)
-                    .frame(height: 280)
+                    .frame(height: 250)
                 } else {
                     EmptyView()
                 }

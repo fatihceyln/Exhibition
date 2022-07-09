@@ -11,6 +11,18 @@ struct HomeView: View {
     
     @StateObject private var homeViewModel: HomeViewModel = HomeViewModel()
     @State private var selectedTopic: TopicEnum = .editorial
+
+    private func photoBy(name: String) -> AttributedString {
+        var string = AttributedString("Photo of the Day by \(name)")
+        
+        if let by = string.range(of: "by") {
+            string[by].font = .callout
+            string[by].foregroundColor = .white.opacity(0.7)
+        }
+        
+        return string
+    }
+    
     
     var body: some View {
         TabView {
@@ -19,6 +31,7 @@ struct HomeView: View {
                     ScrollView(.init()) { // It's must if you want to use ignoreSafeArea
                         TabView(selection: $selectedTopic) {
                             mainScrollableView
+                                .tag(TopicEnum.editorial)
                             ForEach(TopicEnum.allCases.dropFirst()) { topicEnum in
                                 TopicView(topicEnum: topicEnum)
                             }
@@ -90,6 +103,29 @@ struct HomeView: View {
     private var mainScrollableView: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack {
+                if let randomPhoto = homeViewModel.randomPhoto {
+                    ZStack {
+                        PhotoImageView(photo: randomPhoto, showAttributes: false)
+                            .overlay {
+                                Color.black.opacity(0.3)
+                            }
+                        
+                        VStack {
+                            Text("Photos for everyone")
+                                .font(.largeTitle)
+                                .padding(.top, 50)
+                            
+                            if let name = randomPhoto.user?.name {
+                                Text(photoBy(name: name))
+                                    .font(.body)
+                                    .offset(y: 50)
+                            }
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 250)
+                }
+                
                 ForEach(homeViewModel.photos) { photo in
                     ZStack(alignment: .bottomLeading) {
                         PhotoImageView(photo: photo)

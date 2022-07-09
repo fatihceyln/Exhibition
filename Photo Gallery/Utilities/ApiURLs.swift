@@ -9,9 +9,9 @@ import Foundation
 
 class ApiURLs {
     
-    static let apiKey: String = "ma8Zk0gXKPNNBN9q4m77BG657O7twbtoQY7y2c-2LQs"
-    
-    static let baseURL: String = "https://api.unsplash.com/"
+    static let apiKey: String = "nJXLciTieEywZUX30IE76rxti1_GKx1FaS5OE-5MLRQ"
+
+    static let randomPhoto: String = "https://api.unsplash.com/photos/random?client_id=\(apiKey)"
     
     static func editorial(byPage page: Int) -> String {
         "https://api.unsplash.com/photos?page=\(page)&&per_page=10&&client_id=\(apiKey)"
