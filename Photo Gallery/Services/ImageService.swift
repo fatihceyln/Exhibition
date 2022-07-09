@@ -43,7 +43,7 @@ class ImageService {
         }
         
         if let photoId = photoId, let cachedImage = cacheManager.getImage(id: photoId) {
-            print("RETREIVED: \(photoId)")
+            print("RETRIEVED: \(photoId)")
             self.image = cachedImage
         } else {
             downloadImage()

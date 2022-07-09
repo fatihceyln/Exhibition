@@ -9,8 +9,14 @@ import SwiftUI
 
 struct UserProfileView: View {
     let photo: Photo
-    
     @Environment(\.dismiss) private var dismiss
+    @StateObject private var userProfileViewModel: UserProfileViewModel
+    private let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    
+    init(photo: Photo) {
+        self.photo = photo
+        _userProfileViewModel = StateObject(wrappedValue: UserProfileViewModel(userName: photo.user?.username ?? ""))
+    }
     
     var body: some View {
         VStack {
@@ -79,7 +85,19 @@ struct UserProfileView: View {
                 }
             
             ScrollView(showsIndicators: false) {
-                
+                LazyVGrid(columns: columns) {
+                    ForEach(userProfileViewModel.photos) { photo in
+                        ZStack {
+                            PhotoImageView(photo: photo, showAttributes: false)
+                                .aspectRatio(1, contentMode: .fill)
+                        }
+                        .onAppear {
+                            if userProfileViewModel.photos[userProfileViewModel.photos.count - 2].id == photo.id {
+                                userProfileViewModel.photoService.downloadPhotos()
+                            }
+                        }
+                    }
+                }
             }
         }
         .ignoresSafeArea()

@@ -30,5 +30,10 @@ class ApiURLs {
     static func topic(id: String) -> String {
         return "https://api.unsplash.com/topics/\(id)?client_id=HVp3fBJ3w1J6VPVIWpCKaz26lbQUkGTGReu9UC1Q0vg"
     }
+    
+    static func ListAPhotosOfUser(username: String, page: Int
+    ) -> String {
+        return "https://api.unsplash.com/users/\(username)/photos?page=\(page)&&client_id=\(apiKey)"
+    }
 }
 
