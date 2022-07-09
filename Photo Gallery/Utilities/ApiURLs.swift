@@ -8,8 +8,12 @@
 import Foundation
 
 class ApiURLs {
+    static let key1 = "nJXLciTieEywZUX30IE76rxti1_GKx1FaS5OE-5MLRQ"
+    static let key2 = "ma8Zk0gXKPNNBN9q4m77BG657O7twbtoQY7y2c-2LQs"
+    static let key3 = "t1WzXoN8EXln8m6CpZJAhFXrZWsSMdiJ-1qN8yjkgn0"
+    static let key4 = "HVp3fBJ3w1J6VPVIWpCKaz26lbQUkGTGReu9UC1Q0vg"
     
-    static let apiKey: String = "ma8Zk0gXKPNNBN9q4m77BG657O7twbtoQY7y2c-2LQs"
+    static let apiKey: String = key3
 
     static let randomPhoto: String = "https://api.unsplash.com/photos/random?client_id=\(apiKey)"
     

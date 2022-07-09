@@ -33,6 +33,7 @@
 		3DC1C1472879B83C00F4CE3A /* RandomPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC1C1462879B83C00F4CE3A /* RandomPhotoService.swift */; };
 		3DD89C422871A875002547B5 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD89C412871A875002547B5 /* Topic.swift */; };
 		3DE997DE2870BE0500703AA2 /* BlurHashDecode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE997DD2870BE0500703AA2 /* BlurHashDecode.swift */; };
+		3DEB056A2879D85F006B8C8C /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEB05692879D85F006B8C8C /* WebView.swift */; };
 		3DF2CBFE2871FE5C00DFB06D /* PhotoImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF2CBFD2871FE5C00DFB06D /* PhotoImageViewModel.swift */; };
 		3DF2CC002871FE7900DFB06D /* PhotoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF2CBFF2871FE7900DFB06D /* PhotoImageView.swift */; };
 /* End PBXBuildFile section */
@@ -65,6 +66,7 @@
 		3DC1C1462879B83C00F4CE3A /* RandomPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomPhotoService.swift; sourceTree = "<group>"; };
 		3DD89C412871A875002547B5 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		3DE997DD2870BE0500703AA2 /* BlurHashDecode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurHashDecode.swift; sourceTree = "<group>"; };
+		3DEB05692879D85F006B8C8C /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		3DF2CBFD2871FE5C00DFB06D /* PhotoImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoImageViewModel.swift; sourceTree = "<group>"; };
 		3DF2CBFF2871FE7900DFB06D /* PhotoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -135,6 +137,7 @@
 				3DE997DD2870BE0500703AA2 /* BlurHashDecode.swift */,
 				3D4617BC286F2AAF006E0E4B /* ApiURLs.swift */,
 				3DC1C14228798AFD00F4CE3A /* CacheManager.swift */,
+				3DEB05692879D85F006B8C8C /* WebView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				3D4617B3286F27DA006E0E4B /* HomeView.swift in Sources */,
 				3DB4739528704A4A00448685 /* PhotoAttributesView.swift in Sources */,
 				3D0A03552874B43E005111FF /* PhotoService.swift in Sources */,
+				3DEB056A2879D85F006B8C8C /* WebView.swift in Sources */,
 				3DB473932870489000448685 /* AccountSettingsView.swift in Sources */,
 				3DB4738A2870351200448685 /* PreviewProvider.swift in Sources */,
 			);

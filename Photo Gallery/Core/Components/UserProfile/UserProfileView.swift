@@ -11,7 +11,7 @@ struct UserProfileView: View {
     let photo: Photo
     @Environment(\.dismiss) private var dismiss
     @StateObject private var userProfileViewModel: UserProfileViewModel
-    private let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    @State private var showPortfolio: Bool = false
     
     init(photo: Photo) {
         self.photo = photo
@@ -85,12 +85,12 @@ struct UserProfileView: View {
                 }
             
             ScrollView(showsIndicators: false) {
-                LazyVGrid(columns: columns) {
+                LazyVStack {
                     ForEach(userProfileViewModel.photos) { photo in
                         ZStack {
                             PhotoImageView(photo: photo, showAttributes: false)
-                                .aspectRatio(1, contentMode: .fill)
                         }
+                        .frame(width: UIScreen.main.bounds.width, height: photo.height?.calculateHeight(width: photo.width ?? 0, height: photo.height ?? 0))
                         .onAppear {
                             if userProfileViewModel.photos[userProfileViewModel.photos.count - 2].id == photo.id {
                                 userProfileViewModel.photoService.downloadPhotos()
