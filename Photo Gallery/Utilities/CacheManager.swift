@@ -15,7 +15,7 @@ class CacheManager {
     
     var imageCache: NSCache<NSString, UIImage> = {
         let cache = NSCache<NSString, UIImage>()
-        cache.countLimit = 300
+        cache.countLimit = 600
         cache.totalCostLimit = 1024 * 1024 * 500
         return cache
     }() // You have to initialize it, if you don't this won't work.
@@ -25,6 +25,6 @@ class CacheManager {
     }
     
     func getImage(id: String) -> UIImage? {
-        return imageCache.object(forKey: id as NSString)
+        imageCache.object(forKey: id as NSString)
     }
 }
