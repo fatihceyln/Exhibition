@@ -58,14 +58,26 @@ struct UserProfileView: View {
                     .padding(.top, 30)
                 }
                 .overlay(alignment: .bottomTrailing) {
-                    ProfileImageView(photo: photo)
-                        .frame(width: 80, height: 80)
-                        .clipShape(Circle())
-                        .background {
-                            Circle()
-                                .stroke(Color.white, lineWidth: 3)
+                    VStack {
+                        ProfileImageView(photo: photo)
+                            .frame(width: 80, height: 80)
+                            .clipShape(Circle())
+                            .background {
+                                Circle()
+                                    .stroke(Color.white, lineWidth: 3)
+                            }
+                        
+                        if photo.user?.forHire == true {
+                            HStack(spacing: 3) {
+                                Image(systemName: "checkmark.seal")
+                                
+                                Text("Available for hire")
+                            }
+                            .font(.caption.bold())
+                            .foregroundColor(Color("AccentColor"))
                         }
-                        .padding()
+                    }
+                    .padding()
                     
                 }
                 .overlay(alignment: .bottomLeading) {
