@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum UserProfileContent {
+enum UserProfileContent: String {
     case photos, likes, collections
 }
 
@@ -66,7 +66,7 @@ struct UserProfileView: View {
                                 .stroke(Color.white, lineWidth: 3)
                         }
                         .padding()
-                        
+                    
                 }
                 .overlay(alignment: .bottomLeading) {
                     VStack(alignment: .leading) {
@@ -88,7 +88,7 @@ struct UserProfileView: View {
                     .padding()
                 }
             
-            Picker("asdasd", selection: $userProfileContent) {
+            Picker("asdasd", selection: $userProfileContent.animation(.easeInOut)) {
                 Text("Photos")
                     .tag(UserProfileContent.photos)
                 
@@ -100,35 +100,43 @@ struct UserProfileView: View {
             }
             .pickerStyle(SegmentedPickerStyle())
             
-            if userProfileContent == .photos {
-                ScrollView(showsIndicators: false) {
-                    LazyVStack {
-                        ForEach(userProfileViewModel.photos) { photo in
-                            ZStack {
-                                PhotoImageView(photo: photo, showAttributes: false)
-                            }
-                            .frame(width: UIScreen.main.bounds.width, height: photo.height?.calculateHeight(width: photo.width ?? 0, height: photo.height ?? 0))
-                            .onAppear {
-                                if userProfileViewModel.photos[userProfileViewModel.photos.count - 2].id == photo.id {
-                                    userProfileViewModel.photoService.downloadPhotos()
-                                }
+            
+            contentsOfUser
+            
+        }
+        .ignoresSafeArea()
+        .navigationBarHidden(true)
+        .onChange(of: userProfileContent) { value in
+            userProfileViewModel.photos.removeAll()
+            userProfileViewModel.photoService.page = 1
+            userProfileViewModel.showNoContent = false
+            userProfileViewModel.photoService.userProfileContent = value
+            userProfileViewModel.photoService.downloadPhotos()
+        }
+    }
+    
+    private var contentsOfUser: some View {
+        ScrollView(showsIndicators: false) {
+            if userProfileViewModel.showNoContent == true {
+                Text("No \(userProfileContent.rawValue)")
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+                    .animation(.none, value: userProfileContent)
+            } else {
+                LazyVStack {
+                    ForEach(userProfileViewModel.photos) { photo in
+                        ZStack {
+                            PhotoImageView(photo: photo, showAttributes: false)
+                        }
+                        .frame(width: UIScreen.main.bounds.width, height: photo.height?.calculateHeight(width: photo.width ?? 0, height: photo.height ?? 0))
+                        .onAppear {
+                            if userProfileViewModel.photos[userProfileViewModel.photos.count - 2].id == photo.id {
+                                userProfileViewModel.photoService.downloadPhotos()
                             }
                         }
                     }
                 }
             }
-            else if userProfileContent == .likes {
-                ScrollView {
-                    
-                }
-            } else {
-                ScrollView {
-                    
-                }
-            }
         }
-        .ignoresSafeArea()
-        .navigationBarHidden(true)
     }
     
     private func share() {

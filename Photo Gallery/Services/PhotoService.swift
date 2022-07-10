@@ -11,9 +11,10 @@ import Combine
 class PhotoService {
     @Published var photos: [Photo] = []
     private var cancellable: AnyCancellable? = nil
-    private var page: Int = 1
-    private var topicEnum: TopicEnum?
-    private var userName: String?
+    var page: Int = 1
+    private let topicEnum: TopicEnum?
+    private let userName: String?
+    var userProfileContent: UserProfileContent = .photos
     
     init(topicEnum: TopicEnum? = nil, userName: String? = nil) {
         self.topicEnum = topicEnum
@@ -27,7 +28,14 @@ class PhotoService {
         if let topicEnum = topicEnum {
             url = URL(string: ApiURLs.topicPhoto(topic: topicEnum, page: page))
         } else if let userName = userName {
-            url = URL(string: ApiURLs.ListAPhotosOfUser(username: userName, page: page))
+            switch userProfileContent {
+            case .photos:
+                url = URL(string: ApiURLs.ListAPhotosOfUser(username: userName, page: page))
+            case .likes:
+                url = URL(string: ApiURLs.ListAUsersLikedPhotos(username: userName, page: page))
+            case .collections:
+                url = URL(string: "")
+            }
         } else {
             url = URL(string: ApiURLs.editorial(byPage: page))
         }

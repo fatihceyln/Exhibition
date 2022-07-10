@@ -13,6 +13,7 @@ class UserProfileViewModel: ObservableObject {
     let photoService: PhotoService
     private let userName: String
     private var cancellable: AnyCancellable? = nil
+    @Published var showNoContent: Bool = false
     
     init(userName: String) {
         self.userName = userName
@@ -22,6 +23,7 @@ class UserProfileViewModel: ObservableObject {
     
     private func addSubscribers() {
         cancellable = photoService.$photos
+            .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in
                 
@@ -30,6 +32,12 @@ class UserProfileViewModel: ObservableObject {
                     if self?.photos.allSatisfy({$0.id != item.id}) == true {
                         self?.photos.append(item)
                     }
+                }
+                
+                if returnedPhotos.isEmpty && self?.photos.count == 0{
+                    self?.showNoContent = true
+                } else {
+                    self?.showNoContent = false
                 }
             })
     }

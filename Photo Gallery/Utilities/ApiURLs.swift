@@ -12,8 +12,9 @@ class ApiURLs {
     static let key2 = "ma8Zk0gXKPNNBN9q4m77BG657O7twbtoQY7y2c-2LQs"
     static let key3 = "t1WzXoN8EXln8m6CpZJAhFXrZWsSMdiJ-1qN8yjkgn0"
     static let key4 = "HVp3fBJ3w1J6VPVIWpCKaz26lbQUkGTGReu9UC1Q0vg"
+    static let key5 = "qnamd0u9ODrfvksWk7-2gGMgFdGrXzelZasatj9xolc"
     
-    static let apiKey: String = key3
+    static let apiKey: String = key5
 
     static let randomPhoto: String = "https://api.unsplash.com/photos/random?client_id=\(apiKey)"
     
@@ -38,6 +39,14 @@ class ApiURLs {
     static func ListAPhotosOfUser(username: String, page: Int
     ) -> String {
         return "https://api.unsplash.com/users/\(username)/photos?page=\(page)&&client_id=\(apiKey)"
+    }
+    
+    static func ListAUsersLikedPhotos(username: String, page: Int) -> String {
+        return "https://api.unsplash.com/users/\(username)/likes?page=\(page)&&client_id=\(apiKey)"
+    }
+    
+    static func ListAUsersCollections(username: String, page: Int) -> String {
+        return "https://api.unsplash.com/users/\(username)/collections?page=\(page)&&client_id=\(apiKey)"
     }
 }
 
