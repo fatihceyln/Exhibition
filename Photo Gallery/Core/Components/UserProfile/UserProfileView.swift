@@ -73,7 +73,7 @@ struct UserProfileView: View {
                                 
                                 Text("Available for hire")
                             }
-                            .font(.caption.bold())
+                            .font(.caption2.bold())
                             .foregroundColor(Color("AccentColor"))
                         }
                     }
@@ -87,15 +87,17 @@ struct UserProfileView: View {
                         
                         if let location = photo.user?.location {
                             Label(location, systemImage: "mappin.and.ellipse")
+                                .opacity(0.7)
                         }
                         
                         if let bio = photo.user?.bio {
                             Label(bio, systemImage: "globe")
                                 .customProfileLableStlye( titleFont: .caption)
                                 .lineLimit(3)
+                                .opacity(0.7)
                         }
                     }
-                    .frame(width: UIScreen.main.bounds.width * 0.7, alignment: .leading)
+                    .frame(width: UIScreen.main.bounds.width * 0.65, alignment: .leading)
                     .foregroundColor(.white)
                     .padding()
                 }

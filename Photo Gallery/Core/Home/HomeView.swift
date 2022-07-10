@@ -59,6 +59,16 @@ struct HomeView: View {
                 Label("Home", systemImage: "house.fill")
             }
             
+            SearchView()
+                .tabItem {
+                    Label("Search", systemImage: "magnifyingglass")
+                }
+            
+            UploadPhotoView()
+                .tabItem {
+                    Label("Upload", systemImage: "plus.square.fill")
+                }
+            
             ProfileView()
                 .tabItem {
                     Label("Profile", systemImage: "person.fill")
