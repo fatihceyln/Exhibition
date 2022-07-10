@@ -141,6 +141,8 @@ struct SearchView: View {
                 Image(systemName: "xmark.circle")
                     .foregroundColor(.gray)
             }
+            .opacity(searchViewModel.searchText.isEmpty ? 0.0 : 1.0)
+            .animation(.easeInOut, value: searchViewModel.searchText)
 
         }
         .padding(.horizontal)
