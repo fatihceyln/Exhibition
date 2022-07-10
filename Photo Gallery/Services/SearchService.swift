@@ -23,9 +23,9 @@ class SearchService {
         case .photos:
             url = URL(string: ApiURLs.searchPhotos(text: searchText, page: page))
         case .collections:
-            url = URL(string: ApiURLs.searchPhotos(text: searchText, page: page))
+            url = URL(string: ApiURLs.searchCollections(text: searchText, page: page))
         case .users:
-            url = URL(string: ApiURLs.searchPhotos(text: searchText, page: page))
+            url = URL(string: ApiURLs.searchUsers(text: searchText, page: page))
         }
         
         guard let url = url else {return}

@@ -28,7 +28,7 @@ struct SearchView: View {
                 }
             } else {
                 
-                Picker("Search Category", selection: $searchCategory) {
+                Picker("Search Category", selection: $searchCategory.animation(.easeInOut)) {
                     Text("Photos")
                         .tag(SearchCategory.photos)
                     
@@ -40,25 +40,51 @@ struct SearchView: View {
                 }
                 .pickerStyle(.segmented)
                 
-                ScrollView {
-                    LazyVStack {
-                        ForEach(searchViewModel.photos) { photo in
-                            ZStack(alignment: .bottomLeading) {
-                                PhotoImageView(photo: photo)
-                            }
-                            .frame(width: UIScreen.main.bounds.width, height: photo.height?.calculateHeight(width: photo.width ?? 0, height: photo.height ?? 0))
-                            .onAppear {
-                                if searchViewModel.photos.count > 5 {
-                                    if photo.id == searchViewModel.photos[searchViewModel.photos.count - 2].id {
-                                        searchViewModel.searchService.downloadSearchResult()
-                                    }
-                                }
+                switch searchCategory {
+                case .photos:
+                    searchPhotosView
+                case .collections:
+                    searchCollectionsView
+                case .users:
+                    searchUsersView
+                }    
+            }
+            
+        }
+        .onChange(of: searchCategory) { value in
+            
+        }
+    }
+    
+    private var searchUsersView: some View {
+        ScrollView {
+            
+        }
+    }
+    
+    private var searchCollectionsView: some View {
+        ScrollView {
+            
+        }
+    }
+    
+    private var searchPhotosView: some View {
+        ScrollView {
+            LazyVStack {
+                ForEach(searchViewModel.photos) { photo in
+                    ZStack(alignment: .bottomLeading) {
+                        PhotoImageView(photo: photo)
+                    }
+                    .frame(width: UIScreen.main.bounds.width, height: photo.height?.calculateHeight(width: photo.width ?? 0, height: photo.height ?? 0))
+                    .onAppear {
+                        if searchViewModel.photos.count > 5 {
+                            if photo.id == searchViewModel.photos[searchViewModel.photos.count - 2].id {
+                                searchViewModel.searchService.downloadSearchResult()
                             }
                         }
                     }
                 }
             }
-            
         }
     }
     
@@ -106,6 +132,16 @@ struct SearchView: View {
                 .foregroundColor(.gray)
             
             TextField("Seach photos, collections, users", text: $searchViewModel.searchText)
+            
+            Spacer()
+            
+            Button {
+                searchViewModel.searchText = ""
+            } label: {
+                Image(systemName: "xmark.circle")
+                    .foregroundColor(.gray)
+            }
+
         }
         .padding(.horizontal)
         .padding(.vertical, 10)

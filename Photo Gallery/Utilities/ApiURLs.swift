@@ -14,7 +14,7 @@ class ApiURLs {
     static let key4 = "HVp3fBJ3w1J6VPVIWpCKaz26lbQUkGTGReu9UC1Q0vg"
     static let key5 = "qnamd0u9ODrfvksWk7-2gGMgFdGrXzelZasatj9xolc"
     
-    static let apiKey: String = key4
+    static let apiKey: String = key5
 
     static let randomPhoto: String = "https://api.unsplash.com/photos/random?client_id=\(apiKey)"
     
@@ -22,10 +22,7 @@ class ApiURLs {
         "https://api.unsplash.com/photos?page=\(page)&&per_page=10&&client_id=\(apiKey)"
     }
     
-    static func searchBy(name: String) -> String {
-        return "https://api.unsplash.com/search/photos?page=1&query=\(name)&&client_id=\(apiKey)"
-    }
-    
+    // MARK: TOPIC
     static let topics: String = "https://api.unsplash.com/topics?per_page=21&&client_id=\(apiKey)"
     
     static func topicPhoto(topic: TopicEnum, page: Int) -> String {
@@ -36,6 +33,7 @@ class ApiURLs {
         return "https://api.unsplash.com/topics/\(id)?client_id=HVp3fBJ3w1J6VPVIWpCKaz26lbQUkGTGReu9UC1Q0vg"
     }
     
+    // MARK: LIST
     static func ListAPhotosOfUser(username: String, page: Int
     ) -> String {
         return "https://api.unsplash.com/users/\(username)/photos?page=\(page)&&client_id=\(apiKey)"
@@ -49,8 +47,17 @@ class ApiURLs {
         return "https://api.unsplash.com/users/\(username)/collections?page=\(page)&&client_id=\(apiKey)"
     }
     
+    // MARK: SEARCH
     static func searchPhotos(text: String, page: Int) -> String {
         return "https://api.unsplash.com/search/photos?page=\(page)&&query=\(text)&&client_id=\(apiKey)"
+    }
+    
+    static func searchCollections(text: String, page: Int) -> String {
+        return "https://api.unsplash.com/search/collections?page=\(page)&&query=\(text)&&client_id=\(apiKey)"
+    }
+    
+    static func searchUsers(text: String, page: Int) -> String {
+        return "https://api.unsplash.com/search/users?page=\(page)&&query=\(text)&&client_id=\(apiKey)"
     }
 }
 
