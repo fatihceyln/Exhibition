@@ -7,22 +7,59 @@
 
 import SwiftUI
 
+enum SearchCategory: String {
+    case photos, collections, users
+}
+
 struct SearchView: View {
     
-    @State private var text: String = ""
+    @StateObject private var searchViewModel: SearchViewModel = SearchViewModel()
+    @State private var searchCategory: SearchCategory = .photos
     
     var body: some View {
         VStack {
             searchSection
             
-            ScrollView {
-                browseByCategory
+            if searchViewModel.searchText.isEmpty {
+                ScrollView {
+                    browseByCategory
+                    
+                    discoverSection
+                }
+            } else {
                 
-                discoverSection
+                Picker("Search Category", selection: $searchCategory) {
+                    Text("Photos")
+                        .tag(SearchCategory.photos)
+                    
+                    Text("Collections")
+                        .tag(SearchCategory.collections)
+                    
+                    Text("Users")
+                        .tag(SearchCategory.users)
+                }
+                .pickerStyle(.segmented)
+                
+                ScrollView {
+                    LazyVStack {
+                        ForEach(searchViewModel.photos) { photo in
+                            ZStack(alignment: .bottomLeading) {
+                                PhotoImageView(photo: photo)
+                            }
+                            .frame(width: UIScreen.main.bounds.width, height: photo.height?.calculateHeight(width: photo.width ?? 0, height: photo.height ?? 0))
+                            .onAppear {
+                                if searchViewModel.photos.count > 5 {
+                                    if photo.id == searchViewModel.photos[searchViewModel.photos.count - 2].id {
+                                        searchViewModel.searchService.downloadSearchResult()
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
             
         }
-        .padding()
     }
     
     private var discoverSection: some View {
@@ -68,7 +105,7 @@ struct SearchView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.gray)
             
-            TextField("Seach photos, collections, users", text: $text)
+            TextField("Seach photos, collections, users", text: $searchViewModel.searchText)
         }
         .padding(.horizontal)
         .padding(.vertical, 10)

@@ -11,7 +11,7 @@ struct HomeView: View {
     
     @StateObject private var homeViewModel: HomeViewModel = HomeViewModel()
     @State private var selectedTopic: TopicEnum = .editorial
-
+    
     private func photoBy(name: String) -> AttributedString {
         var string = AttributedString("Photo of the Day by \(name)")
         
@@ -59,10 +59,13 @@ struct HomeView: View {
                 Label("Home", systemImage: "house.fill")
             }
             
-            SearchView()
-                .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
-                }
+            NavigationView {
+                SearchView()
+                    .navigationBarHidden(true)
+            }
+            .tabItem {
+                Label("Search", systemImage: "magnifyingglass")
+            }
             
             UploadPhotoView()
                 .tabItem {
