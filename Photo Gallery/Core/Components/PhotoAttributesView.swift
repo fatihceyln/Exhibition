@@ -14,7 +14,6 @@ struct PhotoAttributesView: View {
             LinearGradient(colors: [.black.opacity(0.3), .clear], startPoint: .bottom, endPoint: .top)
             HStack {
                 // MARK: Go user profile
-                
                 NavigationLink {
                     UserProfileView(photo: photo)
                 } label: {
