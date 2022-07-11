@@ -18,8 +18,10 @@ struct PhotoAttributesView: View {
                     UserProfileView(photo: photo)
                 } label: {
                     HStack {
-                        ProfileImageView(photo: photo)
-                            .frame(width: 40, height: 40)
+                        if let user = photo.user {
+                            UserProfileImageView(user: user)
+                                .frame(width: 40, height: 40)
+                        }
                         
                         VStack(alignment: .leading) {
                             Text(photo.user?.name ?? "")

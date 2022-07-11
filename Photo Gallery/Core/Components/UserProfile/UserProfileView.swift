@@ -55,13 +55,15 @@ struct UserProfileView: View {
                 }
                 .overlay(alignment: .bottomTrailing) {
                     VStack {
-                        ProfileImageView(photo: photo)
+                        if let user = photo.user {
+                            UserProfileImageView(user: user)
                             .frame(width: 80, height: 80)
                             .clipShape(Circle())
                             .background {
                                 Circle()
                                     .stroke(Color.white, lineWidth: 3)
                             }
+                        }
                         
                         if photo.user?.forHire == true {
                             HStack(spacing: 3) {
