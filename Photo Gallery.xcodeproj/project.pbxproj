@@ -120,13 +120,13 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		3D2DFEB1287C09B000FF62B8 /* UserImage */ = {
+		3D2DFEB1287C09B000FF62B8 /* UserProfileImage */ = {
 			isa = PBXGroup;
 			children = (
 				3D2DFEB2287C09D000FF62B8 /* UserProfileImageViewModel.swift */,
 				3D2DFEB4287C0B2B00FF62B8 /* UserProfileImageView.swift */,
 			);
-			path = UserImage;
+			path = UserProfileImage;
 			sourceTree = "<group>";
 		};
 		3D461798286F2689006E0E4B = {
@@ -267,7 +267,7 @@
 				3DB4739428704A4A00448685 /* PhotoAttributesView.swift */,
 				3DAD861A287B66EC0009B258 /* UsersRow */,
 				3D0A03562874C002005111FF /* UserProfile */,
-				3D2DFEB1287C09B000FF62B8 /* UserImage */,
+				3D2DFEB1287C09B000FF62B8 /* UserProfileImage */,
 				3DF2CBFC2871FE4F00DFB06D /* Image */,
 				3D72D7312871F8C700EF3F6A /* Topic */,
 			);
