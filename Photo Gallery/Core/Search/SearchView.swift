@@ -47,19 +47,33 @@ struct SearchView: View {
                     searchCollectionsView
                 case .users:
                     searchUsersView
-                }    
+                }
             }
-            
-        }
-        .onChange(of: searchCategory) { value in
             
         }
     }
     
     private var searchUsersView: some View {
-        ScrollView {
-            
+        List {
+            ForEach(searchViewModel.users) { user in
+                ZStack(alignment: .bottomLeading) {
+                    NavigationLink {
+//                        UserProfileView(photo: )
+                    } label: {
+                        UsersRowView(user: user)
+                    }
+
+                }
+                .onAppear {
+                    if searchViewModel.users.count > 5 {
+                        if user.id == searchViewModel.users[searchViewModel.users.count - 2].id {
+                            searchViewModel.searchUserService.downloadSearchResult()
+                        }
+                    }
+                }
+            }
         }
+        .listStyle(.plain)
     }
     
     private var searchCollectionsView: some View {
@@ -79,7 +93,7 @@ struct SearchView: View {
                     .onAppear {
                         if searchViewModel.photos.count > 5 {
                             if photo.id == searchViewModel.photos[searchViewModel.photos.count - 2].id {
-                                searchViewModel.searchService.downloadSearchResult()
+                                searchViewModel.searchPhotoService.downloadSearchResult()
                             }
                         }
                     }
@@ -144,7 +158,7 @@ struct SearchView: View {
             }
             .opacity(searchViewModel.searchText.isEmpty ? 0.0 : 1.0)
             .animation(.easeInOut, value: searchViewModel.searchText)
-
+            
         }
         .padding(.horizontal)
         .padding(.vertical, 10)

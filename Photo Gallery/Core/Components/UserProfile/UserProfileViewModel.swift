@@ -15,9 +15,9 @@ class UserProfileViewModel: ObservableObject {
     private var cancellable: AnyCancellable? = nil
     @Published var showNoContent: Bool = false
     
-    init(userName: String) {
-        self.username = userName
-        userPhotoService = UserPhotoService(username: userName)
+    init(username: String) {
+        self.username = username
+        userPhotoService = UserPhotoService(username: username)
         addSubscribers()
     }
     

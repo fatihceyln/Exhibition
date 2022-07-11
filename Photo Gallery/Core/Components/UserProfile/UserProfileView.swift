@@ -15,7 +15,7 @@ struct UserProfileView: View {
     
     init(photo: Photo) {
         self.photo = photo
-        _userProfileViewModel = StateObject(wrappedValue: UserProfileViewModel(userName: photo.user?.username ?? ""))
+        _userProfileViewModel = StateObject(wrappedValue: UserProfileViewModel(username: photo.user?.username ?? ""))
     }
     
     var body: some View {

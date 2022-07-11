@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class SearchService {
+class SearchPhotoService {
     @Published var photos: [Photo] = []
     var searchText: String = ""
     private var page: Int = 1

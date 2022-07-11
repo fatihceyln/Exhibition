@@ -13,8 +13,19 @@ struct UsersRowView: View {
     
     var body: some View {
         HStack {
-//            ProfileImageView(photo: <#T##Photo#>)
+            UserProfileImageView(user: user)
+                .frame(width: 60, height: 60)
+            
+            VStack(alignment: .leading) {
+                Text(user.name ?? "")
+                
+                Text(user.username ?? "")
+                    .foregroundColor(.secondary)
+            }
+            .padding(.leading)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
     }
 }
 

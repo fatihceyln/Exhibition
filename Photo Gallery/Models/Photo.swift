@@ -188,7 +188,7 @@ struct Links: Codable {
     }
 }
 
-struct User: Codable {
+struct User: Identifiable, Codable {
     let id: String?
     let updatedAt: String?
     let username, name, firstName: String?
