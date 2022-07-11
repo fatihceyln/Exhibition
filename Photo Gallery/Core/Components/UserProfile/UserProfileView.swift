@@ -150,11 +150,18 @@ struct UserProfileView: View {
                                         LinearGradient(colors: [.black.opacity(0.3), .clear], startPoint: .bottom, endPoint: .top)
                                         
                                         if userProfileContent != .photos {
-                                            Text(photo.user?.name ?? "")
-                                                .foregroundColor(.white)
-                                                .font(.headline)
-                                                .padding(.horizontal)
-                                                .padding(.vertical, 5)
+                                            NavigationLink {
+                                                if let user = photo.user {
+                                                    UserProfileView(user: user)
+                                                }
+                                            } label: {
+                                                Text(photo.user?.name ?? "")
+                                                    .foregroundColor(.white)
+                                                    .font(.headline)
+                                                    .padding(.horizontal)
+                                                    .padding(.vertical, 5)
+                                            }
+
                                         }
                                     }
                                 }

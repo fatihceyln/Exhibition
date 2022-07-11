@@ -16,7 +16,7 @@ class RandomPhotoService {
         downloadPhoto()
     }
     
-    private func downloadPhoto() {
+    func downloadPhoto() {
         
         guard let url = URL(string: ApiURLs.randomPhoto) else {return}
         

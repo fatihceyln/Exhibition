@@ -12,9 +12,11 @@ class SearchViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var photos: [Photo] = []
     @Published var users: [User] = []
+    @Published var randomPhotos: [Photo] = []
     private var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     let searchPhotoService: SearchPhotoService = SearchPhotoService()
     let searchUserService: SearchUserService = SearchUserService()
+    let randomPhotoService: RandomPhotoService = RandomPhotoService()
 
     init() {
         addSubscribers()
@@ -58,6 +60,19 @@ class SearchViewModel: ObservableObject {
                 for item in returnedUsers {
                     if self?.users.allSatisfy({$0.id != item.id}) == true {
                         self?.users.append(item)
+                    }
+                }
+            }
+            .store(in: &cancellables)
+        
+        randomPhotoService.$photo
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                
+            } receiveValue: { [weak self] returnedPhoto in
+                if let returnedPhoto = returnedPhoto {
+                    if self?.randomPhotos.allSatisfy({$0.id != returnedPhoto.id}) == true {
+                        self?.randomPhotos.append(returnedPhoto)
                     }
                 }
             }
