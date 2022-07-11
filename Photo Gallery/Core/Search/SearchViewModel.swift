@@ -14,8 +14,8 @@ class SearchViewModel: ObservableObject {
     private var cancellables: Set<AnyCancellable> = Set<AnyCancellable>()
     let searchService: SearchService = SearchService()
     
-//    private let turkishChars: [Character] = ["ı", "ğ", "ç", "ş", "ö", "ü"]
-//    private let englishChars: [Character] = ["i", "g", "c", "s", "o", "u"]
+    private let turkishChars: [Character] = ["ı", "ğ", "ç", "ş", "ö", "ü"]
+    private let englishChars: [Character] = ["i", "g", "c", "s", "o", "u"]
     
     init() {
         addSubscribers()
@@ -27,10 +27,10 @@ class SearchViewModel: ObservableObject {
             .sink { [weak self] returnedSearchText in
                 self?.photos.removeAll()
                 
-                let text = returnedSearchText.lowercased().trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: " ", with: "")
+                let text = returnedSearchText.lowercased().trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: " ", with: "").folding(options: .diacriticInsensitive, locale: .current)
                 
                 self?.searchService.searchText = text
-                print(returnedSearchText.lowercased().trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: " ", with: ""))
+                print(text)
                 self?.searchService.downloadSearchResult()
             }
             .store(in: &cancellables)
