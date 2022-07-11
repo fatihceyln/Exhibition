@@ -17,7 +17,7 @@ class UserProfileViewModel: ObservableObject {
     
     init(userName: String) {
         self.userName = userName
-        photoService = PhotoService(topicEnum: nil, userName: userName)
+        photoService = PhotoService(userName: userName)
         addSubscribers()
     }
     

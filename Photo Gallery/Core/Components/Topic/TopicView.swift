@@ -70,7 +70,7 @@ struct TopicView: View {
                     .onAppear {
                         if topicViewModel.photos.count > 5 {
                             if photo.id == topicViewModel.photos[topicViewModel.photos.count - 2].id {
-                                topicViewModel.photoService.downloadPhotos()
+                                topicViewModel.topicPhotoService.downloadPhotos()
                             }
                         }
                     }

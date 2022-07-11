@@ -12,12 +12,10 @@ class PhotoService {
     @Published var photos: [Photo] = []
     private var cancellable: AnyCancellable? = nil
     var page: Int = 1
-    private let topicEnum: TopicEnum?
     private let userName: String?
     var userProfileContent: UserProfileContent = .photos
     
-    init(topicEnum: TopicEnum? = nil, userName: String? = nil) {
-        self.topicEnum = topicEnum
+    init(userName: String? = nil) {
         self.userName = userName
         downloadPhotos()
     }
@@ -25,9 +23,7 @@ class PhotoService {
     func downloadPhotos() {
         var url: URL? = nil
         
-        if let topicEnum = topicEnum {
-            url = URL(string: ApiURLs.topicPhoto(topic: topicEnum, page: page))
-        } else if let userName = userName {
+        if let userName = userName {
             switch userProfileContent {
             case .photos:
                 url = URL(string: ApiURLs.ListAPhotosOfUser(username: userName, page: page))

@@ -132,6 +132,7 @@ struct SearchView: View {
                 .foregroundColor(.gray)
             
             TextField("Seach photos, collections, users", text: $searchViewModel.searchText)
+                .disableAutocorrection(true)
             
             Spacer()
             
