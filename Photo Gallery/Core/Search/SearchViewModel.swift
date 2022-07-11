@@ -62,6 +62,5 @@ class SearchViewModel: ObservableObject {
                 }
             }
             .store(in: &cancellables)
-
     }
 }

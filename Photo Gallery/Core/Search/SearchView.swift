@@ -91,7 +91,7 @@ struct SearchView: View {
                     .frame(width: UIScreen.main.bounds.width, height: photo.height?.calculateHeight(width: photo.width ?? 0, height: photo.height ?? 0))
                     .onAppear {
                         if searchViewModel.photos.count > 5 {
-                            if photo.id == searchViewModel.photos[searchViewModel.photos.count - 2].id {
+                            if photo.id == searchViewModel.photos[searchViewModel.photos.count - 2].id && !searchViewModel.photos.isEmpty {
                                 searchViewModel.searchPhotoService.downloadSearchResult()
                             }
                         }
@@ -128,9 +128,18 @@ struct SearchView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
-                    ForEach(0..<10, id: \.self) { _ in
-                        RoundedRectangle(cornerRadius: 10)
+                    ForEach(BrowseByCategory.allCases, id: \.self) { category in
+                        Image(category.rawValue)
+                            .resizable()
+                            .scaledToFill()
                             .frame(width: 240, height: 150)
+                            .cornerRadius(10)
+                            .overlay {
+                                Color.black.opacity(0.4)
+                                
+                                Text(category.rawValue)
+                                    .font(.title2.bold())
+                            }
                     }
                 }
             }
