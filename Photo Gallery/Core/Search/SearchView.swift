@@ -58,11 +58,10 @@ struct SearchView: View {
             ForEach(searchViewModel.users) { user in
                 ZStack(alignment: .bottomLeading) {
                     NavigationLink {
-//                        UserProfileView(photo: )
+                        UserProfileView(user: user)
                     } label: {
                         UsersRowView(user: user)
                     }
-
                 }
                 .onAppear {
                     if searchViewModel.users.count > 5 {

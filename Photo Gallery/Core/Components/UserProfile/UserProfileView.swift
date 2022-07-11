@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct UserProfileView: View {
-    let photo: Photo
+    let user: User
+    let photo: Photo?
     @Environment(\.dismiss) private var dismiss
     @StateObject private var userProfileViewModel: UserProfileViewModel
     @State private var userProfileContent: UserProfileContent = .photos
     
-    init(photo: Photo) {
+    init(user: User, photo: Photo? = nil) {
+        self.user = user
         self.photo = photo
-        _userProfileViewModel = StateObject(wrappedValue: UserProfileViewModel(username: photo.user?.username ?? ""))
+        _userProfileViewModel = StateObject(wrappedValue: UserProfileViewModel(username: user.username ?? ""))
     }
+
     
     var body: some View {
         VStack {
@@ -25,10 +28,14 @@ struct UserProfileView: View {
                 .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.25)
                 .background {
                     
-                    PhotoImageView(photo: photo, showAttributes: false)
-                        .scaledToFill()
-                        .opacity(0.6)
-                        .blur(radius: 20)
+                    if let photo = photo {
+                        PhotoImageView(photo: photo, showAttributes: false)
+                            .scaledToFill()
+                            .opacity(0.6)
+                            .blur(radius: 20)
+                    } else {
+                        LinearGradient(colors: [.white.opacity(0.1), .white.opacity(0.4)], startPoint: .bottom, endPoint: .top)
+                    }
                 }
                 .clipped()
                 .overlay(alignment: .topLeading) {
@@ -55,7 +62,7 @@ struct UserProfileView: View {
                 }
                 .overlay(alignment: .bottomTrailing) {
                     VStack {
-                        if let user = photo.user {
+                        if let user = user {
                             UserProfileImageView(user: user)
                             .frame(width: 80, height: 80)
                             .clipShape(Circle())
@@ -65,7 +72,7 @@ struct UserProfileView: View {
                             }
                         }
                         
-                        if photo.user?.forHire == true {
+                        if user.forHire == true {
                             HStack(spacing: 3) {
                                 Image(systemName: "checkmark.seal")
                                 
@@ -80,15 +87,15 @@ struct UserProfileView: View {
                 }
                 .overlay(alignment: .bottomLeading) {
                     VStack(alignment: .leading) {
-                        Text(photo.user?.name ?? "")
+                        Text(user.name ?? "")
                             .font(.title)
                         
-                        if let location = photo.user?.location {
+                        if let location = user.location {
                             Label(location, systemImage: "mappin.and.ellipse")
                                 .opacity(0.7)
                         }
                         
-                        if let bio = photo.user?.bio {
+                        if let bio = user.bio {
                             Label(bio, systemImage: "globe")
                                 .customProfileLableStlye( titleFont: .caption)
                                 .lineLimit(3)
@@ -154,7 +161,7 @@ struct UserProfileView: View {
                         }
                         .frame(width: UIScreen.main.bounds.width, height: photo.height?.calculateHeight(width: photo.width ?? 0, height: photo.height ?? 0))
                         .onAppear {
-                            if userProfileViewModel.photos[userProfileViewModel.photos.count - 2].id == photo.id {
+                            if userProfileViewModel.photos[userProfileViewModel.photos.count - 2].id == photo.id && userProfileViewModel.photos.isEmpty != true {
                                 userProfileViewModel.userPhotoService.downloadPhotos()
                             }
                         }
@@ -165,7 +172,7 @@ struct UserProfileView: View {
     }
     
     private func share() {
-        guard let url = URL(string: photo.user?.portfolioURL ?? "https://unsplash.com") else {return}
+        guard let url = URL(string: user.portfolioURL ?? "https://unsplash.com") else {return}
         
         let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         
@@ -202,6 +209,6 @@ extension View {
 
 struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        UserProfileView(photo: photo)
+        UserProfileView(user: User(id: nil, updatedAt: nil, username: nil, name: nil, firstName: nil, lastName: nil, twitterUsername: nil, portfolioURL: nil, bio: nil, location: nil, links: nil, profileImage: nil, instagramUsername: nil, totalCollections: nil, totalLikes: nil, totalPhotos: nil, acceptedTos: nil, forHire: nil, social: nil))
     }
 }
