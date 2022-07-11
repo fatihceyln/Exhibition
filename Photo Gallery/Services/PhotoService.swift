@@ -12,31 +12,13 @@ class PhotoService {
     @Published var photos: [Photo] = []
     private var cancellable: AnyCancellable? = nil
     var page: Int = 1
-    private let userName: String?
-    var userProfileContent: UserProfileContent = .photos
     
-    init(userName: String? = nil) {
-        self.userName = userName
+    init() {
         downloadPhotos()
     }
     
     func downloadPhotos() {
-        var url: URL? = nil
-        
-        if let userName = userName {
-            switch userProfileContent {
-            case .photos:
-                url = URL(string: ApiURLs.ListAPhotosOfUser(username: userName, page: page))
-            case .likes:
-                url = URL(string: ApiURLs.ListAUsersLikedPhotos(username: userName, page: page))
-            case .collections:
-                url = URL(string: "")
-            }
-        } else {
-            url = URL(string: ApiURLs.editorial(byPage: page))
-        }
-        
-        guard let url = url else {return}
+        guard let url = URL(string: ApiURLs.editorial(byPage: page)) else {return}
         page += 1
         
         cancellable = NetworkingManager.shared.download(url: url)

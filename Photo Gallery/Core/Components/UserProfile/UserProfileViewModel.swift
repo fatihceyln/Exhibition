@@ -10,19 +10,19 @@ import Combine
 
 class UserProfileViewModel: ObservableObject {
     @Published var photos: [Photo] = []
-    let photoService: PhotoService
-    private let userName: String
+    let userPhotoService: UserPhotoService
+    private let username: String
     private var cancellable: AnyCancellable? = nil
     @Published var showNoContent: Bool = false
     
     init(userName: String) {
-        self.userName = userName
-        photoService = PhotoService(userName: userName)
+        self.username = userName
+        userPhotoService = UserPhotoService(username: userName)
         addSubscribers()
     }
     
     private func addSubscribers() {
-        cancellable = photoService.$photos
+        cancellable = userPhotoService.$photos
             .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in

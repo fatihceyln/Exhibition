@@ -9,10 +9,6 @@ import Foundation
 import Combine
 import SwiftUI
 
-enum ImageOptions {
-    case photo, profile
-}
-
 class ImageService {
     @Published var image: UIImage? = nil
     private var cancellable: AnyCancellable? = nil

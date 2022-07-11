@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-enum UserProfileContent: String {
-    case photos, likes, collections
-}
-
 struct UserProfileView: View {
     let photo: Photo
     @Environment(\.dismiss) private var dismiss
@@ -122,10 +118,10 @@ struct UserProfileView: View {
         .navigationBarHidden(true)
         .onChange(of: userProfileContent) { value in
             userProfileViewModel.photos.removeAll()
-            userProfileViewModel.photoService.page = 1
+            userProfileViewModel.userPhotoService.page = 1
             userProfileViewModel.showNoContent = false
-            userProfileViewModel.photoService.userProfileContent = value
-            userProfileViewModel.photoService.downloadPhotos()
+            userProfileViewModel.userPhotoService.userProfileContent = value
+            userProfileViewModel.userPhotoService.downloadPhotos()
         }
     }
     
@@ -157,7 +153,7 @@ struct UserProfileView: View {
                         .frame(width: UIScreen.main.bounds.width, height: photo.height?.calculateHeight(width: photo.width ?? 0, height: photo.height ?? 0))
                         .onAppear {
                             if userProfileViewModel.photos[userProfileViewModel.photos.count - 2].id == photo.id {
-                                userProfileViewModel.photoService.downloadPhotos()
+                                userProfileViewModel.userPhotoService.downloadPhotos()
                             }
                         }
                     }

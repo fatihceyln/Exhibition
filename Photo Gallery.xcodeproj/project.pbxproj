@@ -12,6 +12,8 @@
 		3D0A035A2874C014005111FF /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D0A03592874C014005111FF /* UserProfileView.swift */; };
 		3D2533D6287ADEB100EC517D /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2533D5287ADEB100EC517D /* SearchView.swift */; };
 		3D2DFEAA287C018D00FF62B8 /* TopicPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2DFEA9287C018D00FF62B8 /* TopicPhotoService.swift */; };
+		3D2DFEAC287C03D900FF62B8 /* UserPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2DFEAB287C03D900FF62B8 /* UserPhotoService.swift */; };
+		3D2DFEAE287C056200FF62B8 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D2DFEAD287C056200FF62B8 /* Enums.swift */; };
 		3D4617A5286F268A006E0E4B /* Photo_GalleryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4617A4286F268A006E0E4B /* Photo_GalleryApp.swift */; };
 		3D4617A9286F268A006E0E4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D4617A8286F268A006E0E4B /* Assets.xcassets */; };
 		3D4617AC286F268A006E0E4B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D4617AB286F268A006E0E4B /* Preview Assets.xcassets */; };
@@ -51,6 +53,8 @@
 		3D0A03592874C014005111FF /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		3D2533D5287ADEB100EC517D /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		3D2DFEA9287C018D00FF62B8 /* TopicPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicPhotoService.swift; sourceTree = "<group>"; };
+		3D2DFEAB287C03D900FF62B8 /* UserPhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotoService.swift; sourceTree = "<group>"; };
+		3D2DFEAD287C056200FF62B8 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		3D4617A1286F268A006E0E4B /* Photo Gallery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Gallery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D4617A4286F268A006E0E4B /* Photo_GalleryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo_GalleryApp.swift; sourceTree = "<group>"; };
 		3D4617A8286F268A006E0E4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -161,6 +165,7 @@
 				3D4617BC286F2AAF006E0E4B /* ApiURLs.swift */,
 				3DC1C14228798AFD00F4CE3A /* CacheManager.swift */,
 				3DEB05692879D85F006B8C8C /* WebView.swift */,
+				3D2DFEAD287C056200FF62B8 /* Enums.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -169,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				3D0A03542874B43E005111FF /* PhotoService.swift */,
+				3D2DFEAB287C03D900FF62B8 /* UserPhotoService.swift */,
 				3D2DFEA9287C018D00FF62B8 /* TopicPhotoService.swift */,
 				3DC1C1462879B83C00F4CE3A /* RandomPhotoService.swift */,
 				3D4617C6286F2F47006E0E4B /* ImageService.swift */,
@@ -380,12 +386,14 @@
 				3DF2CC002871FE7900DFB06D /* PhotoImageView.swift in Sources */,
 				3D4617A5286F268A006E0E4B /* Photo_GalleryApp.swift in Sources */,
 				3DB473852870320800448685 /* ProfileImageViewModel.swift in Sources */,
+				3D2DFEAC287C03D900FF62B8 /* UserPhotoService.swift in Sources */,
 				3D4617B3286F27DA006E0E4B /* HomeView.swift in Sources */,
 				3DB4739528704A4A00448685 /* PhotoAttributesView.swift in Sources */,
 				3D0A03552874B43E005111FF /* PhotoService.swift in Sources */,
 				3D2533D6287ADEB100EC517D /* SearchView.swift in Sources */,
 				3DEB056A2879D85F006B8C8C /* WebView.swift in Sources */,
 				3DB473932870489000448685 /* AccountSettingsView.swift in Sources */,
+				3D2DFEAE287C056200FF62B8 /* Enums.swift in Sources */,
 				3DB4738A2870351200448685 /* PreviewProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
