@@ -12,6 +12,8 @@ struct ProfileView: View {
     private let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @State private var showAccountSettings: Bool = false
     
+    @State private var userProfileContent: UserProfileContent = .photos
+    
     var body: some View {
         VStack {
             Rectangle()
@@ -67,6 +69,18 @@ struct ProfileView: View {
                     .padding(.top, 30)
                     .font(.title2)
                 }
+            
+            Picker("User content", selection: $userProfileContent.animation(.easeInOut)) {
+                Text("Photos")
+                    .tag(UserProfileContent.photos)
+                
+                Text("Likes")
+                    .tag(UserProfileContent.likes)
+                
+                Text("Collections")
+                    .tag(UserProfileContent.collections)
+            }
+            .pickerStyle(SegmentedPickerStyle())
             
             ScrollView(showsIndicators: false) {
                 LazyVGrid(columns: columns) {

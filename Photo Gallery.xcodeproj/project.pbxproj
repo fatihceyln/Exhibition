@@ -29,6 +29,8 @@
 		3D4617C4286F2CF4006E0E4B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4617C3286F2CF4006E0E4B /* HomeViewModel.swift */; };
 		3D4617C7286F2F47006E0E4B /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4617C6286F2F47006E0E4B /* ImageService.swift */; };
 		3D6243EC287D55100066329F /* CategoryPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6243EB287D55100066329F /* CategoryPhotosView.swift */; };
+		3D6243EE287D5C4B0066329F /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6243ED287D5C4B0066329F /* ProfileViewModel.swift */; };
+		3D6243F0287D651B0066329F /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6243EF287D651B0066329F /* ImageSaver.swift */; };
 		3D72D7332871F8E000EF3F6A /* TopicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D72D7322871F8E000EF3F6A /* TopicViewModel.swift */; };
 		3D72D7352871F9A400EF3F6A /* TopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D72D7342871F9A400EF3F6A /* TopicView.swift */; };
 		3DAD8611287AEA6D0009B258 /* UploadPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DAD8610287AEA6D0009B258 /* UploadPhotoView.swift */; };
@@ -75,6 +77,8 @@
 		3D4617C3286F2CF4006E0E4B /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		3D4617C6286F2F47006E0E4B /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		3D6243EB287D55100066329F /* CategoryPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPhotosView.swift; sourceTree = "<group>"; };
+		3D6243ED287D5C4B0066329F /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		3D6243EF287D651B0066329F /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		3D72D7322871F8E000EF3F6A /* TopicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicViewModel.swift; sourceTree = "<group>"; };
 		3D72D7342871F9A400EF3F6A /* TopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicView.swift; sourceTree = "<group>"; };
 		3DAD8610287AEA6D0009B258 /* UploadPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPhotoView.swift; sourceTree = "<group>"; };
@@ -184,6 +188,7 @@
 				3DC1C14228798AFD00F4CE3A /* CacheManager.swift */,
 				3DEB05692879D85F006B8C8C /* WebView.swift */,
 				3D2DFEAD287C056200FF62B8 /* Enums.swift */,
+				3D6243EF287D651B0066329F /* ImageSaver.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -286,6 +291,7 @@
 		3DB4738D287039F500448685 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				3D6243ED287D5C4B0066329F /* ProfileViewModel.swift */,
 				3DB473902870483200448685 /* ProfileView.swift */,
 				3DB473922870489000448685 /* AccountSettingsView.swift */,
 			);
@@ -394,6 +400,7 @@
 				3D72D7332871F8E000EF3F6A /* TopicViewModel.swift in Sources */,
 				3D72D7352871F9A400EF3F6A /* TopicView.swift in Sources */,
 				3DAD8611287AEA6D0009B258 /* UploadPhotoView.swift in Sources */,
+				3D6243EE287D5C4B0066329F /* ProfileViewModel.swift in Sources */,
 				3D2DFEB5287C0B2B00FF62B8 /* UserProfileImageView.swift in Sources */,
 				3D0A035A2874C014005111FF /* UserProfileView.swift in Sources */,
 				3DAD8617287B506A0009B258 /* SearchPhotoService.swift in Sources */,
@@ -401,6 +408,7 @@
 				3D4617A5286F268A006E0E4B /* Photo_GalleryApp.swift in Sources */,
 				3D2DFEAC287C03D900FF62B8 /* UserPhotoService.swift in Sources */,
 				3D4617B3286F27DA006E0E4B /* HomeView.swift in Sources */,
+				3D6243F0287D651B0066329F /* ImageSaver.swift in Sources */,
 				3D2DFEB3287C09D000FF62B8 /* UserProfileImageViewModel.swift in Sources */,
 				3D2DFEB0287C075300FF62B8 /* UserProfileImageService.swift in Sources */,
 				3DB4739528704A4A00448685 /* PhotoAttributesView.swift in Sources */,
@@ -542,6 +550,7 @@
 				DEVELOPMENT_TEAM = 5CYVKDSSNH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Permission to save your selected photos to photo library.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -571,6 +580,7 @@
 				DEVELOPMENT_TEAM = 5CYVKDSSNH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Permission to save your selected photos to photo library.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

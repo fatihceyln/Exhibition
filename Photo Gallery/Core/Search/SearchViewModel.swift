@@ -32,7 +32,7 @@ class SearchViewModel: ObservableObject {
                 
                 self?.searchPhotoService.searchText = text
                 self?.searchUserService.searchText = text
-                print(text)
+                
                 self?.searchPhotoService.downloadSearchResult()
                 self?.searchUserService.downloadSearchResult()
             }
