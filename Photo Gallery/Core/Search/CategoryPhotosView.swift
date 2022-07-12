@@ -17,7 +17,7 @@ struct CategoryPhotosView: View {
         ZStack {
             ScrollView {
                 LazyVStack {
-                    ForEach(searchViewModel.photos) { photo in
+                    ForEach(searchViewModel.categoryPhotos) { photo in
                         ZStack(alignment: .bottomLeading) {
                             PhotoImageView(photo: photo) {
                                 ZStack(alignment: .bottomLeading) {
@@ -61,6 +61,8 @@ struct CategoryPhotosView: View {
         .toolbar(content: {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
+                    searchViewModel.photos.removeAll()
+                    searchViewModel.searchText = ""
                     dismiss()
                 } label: {
                     Image(systemName: "chevron.left")

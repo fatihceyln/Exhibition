@@ -28,7 +28,7 @@ struct UserProfileView: View {
                 .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.25)
                 .background {
                     if let photo = photo {
-                        PhotoImageView(photo: photo)  {}
+                        PhotoImageView(photo: photo) {}
                             .scaledToFill()
                             .opacity(0.6)
                             .blur(radius: 20)

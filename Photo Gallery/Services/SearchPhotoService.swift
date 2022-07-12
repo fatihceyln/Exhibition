@@ -10,9 +10,11 @@ import Combine
 
 class SearchPhotoService {
     @Published var photos: [Photo] = []
+    @Published var categoryPhotos: [Photo] = []
     var searchText: String = ""
     private var page: Int = 1
-    private var cancellable: AnyCancellable? = nil
+    private var searchCancellable: AnyCancellable? = nil
+    private var categoryCancellable: AnyCancellable? = nil
     var searchCategory: SearchCategory = .photos
     
     func downloadSearchResult() {
@@ -32,7 +34,7 @@ class SearchPhotoService {
         
         page += 1
         
-        cancellable = NetworkingManager.shared.download(url: url)
+        searchCancellable = NetworkingManager.shared.download(url: url)
             .subscribe(on: DispatchQueue.global(qos: .background))
             .decode(type: SearchPhoto.self, decoder: JSONDecoder())
             .sink(receiveCompletion: { completion in
@@ -46,7 +48,24 @@ class SearchPhotoService {
                 if let returnedPhotos = returnedSearchPhoto.photos {
                     self?.photos = returnedPhotos
                 }
-                self?.cancellable?.cancel()
+                self?.searchCancellable?.cancel()
+            })
+    }
+    
+    func downloadCategoryResult() {
+        guard let url = URL(string: ApiURLs.searchPhotos(text: searchText, page: page)) else {return}
+        page += 1
+        
+        categoryCancellable = NetworkingManager.shared.download(url: url)
+            .subscribe(on: DispatchQueue.global(qos: .background))
+            .decode(type: SearchPhoto.self, decoder: JSONDecoder())
+            .sink(receiveCompletion: { _ in
+                
+            }, receiveValue: { [weak self] returnedCategoryPhotos in
+                if let returnedPhotos = returnedCategoryPhotos.photos {
+                    self?.categoryPhotos = returnedPhotos
+                }
+                self?.categoryCancellable?.cancel()
             })
     }
 }

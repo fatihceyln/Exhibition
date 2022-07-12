@@ -50,7 +50,6 @@ struct SearchView: View {
                     searchUsersView
                 }
             }
-            
         }
     }
     

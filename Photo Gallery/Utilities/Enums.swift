@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum SearchOption {
+    case search, category
+}
+
 enum UserProfileContent: String {
     case photos, likes, collections
 }
