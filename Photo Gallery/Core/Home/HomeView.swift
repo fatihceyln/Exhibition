@@ -121,6 +121,7 @@ struct HomeView: View {
                         PhotoImageView(photo: randomPhoto) {
                             Color.black.opacity(0.3)
                         }
+                        .overlay(Color.white.opacity(0.0000001)) // for disabling tap gestures
                         .scaledToFill()
                         
                         VStack {
