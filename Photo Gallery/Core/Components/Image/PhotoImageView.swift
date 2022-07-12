@@ -7,20 +7,20 @@
 
 import SwiftUI
 
-struct PhotoImageView: View {
+struct PhotoImageView<Content: View>: View {
     let photo: Photo
     @StateObject private var photoImageViewModel: PhotoImageViewModel
-    private let showAttributes: Bool
+    private let overlayContent: Content
     
     private let imageSaver: ImageSaver = ImageSaver()
     @State private var isComplete: Bool = false
     @State private var scale: CGFloat = 1
     @State private var cornerRadius: CGFloat = 0
     
-    init(photo: Photo, showAttributes: Bool = true) {
+    init(photo: Photo, @ViewBuilder overlayContent: () -> Content) {
         self.photo = photo
+        self.overlayContent = overlayContent()
         _photoImageViewModel = StateObject(wrappedValue: PhotoImageViewModel(photo: photo))
-        self.showAttributes = showAttributes
     }
     
     var body: some View {
@@ -29,9 +29,7 @@ struct PhotoImageView: View {
                 Image(uiImage: image)
                     .resizable()
                     .overlay {
-                        if showAttributes {
-                            PhotoAttributesView(photo: photo)
-                        }
+                        overlayContent
                     }
                     .cornerRadius(cornerRadius)
                     .scaleEffect(scale)
@@ -85,8 +83,8 @@ struct PhotoImageView: View {
                             .padding([.top, .trailing])
                         }
                     }
-
-
+                
+                
             } else if photoImageViewModel.isLoading {
                 if let image = UIImage(blurHash: photo.blurHash ?? "", size: CGSize(width: 32, height: 32), punch: 0.5) {
                     Image(uiImage: image)
@@ -110,8 +108,10 @@ struct PhotoImageView: View {
 
 struct PhotoImageView_Previews: PreviewProvider {
     static var previews: some View {
-        PhotoImageView(photo: photo)
-            .preferredColorScheme(.dark)
+        PhotoImageView(photo: photo, overlayContent: {
+            
+        })
+        .preferredColorScheme(.dark)
     }
 }
 

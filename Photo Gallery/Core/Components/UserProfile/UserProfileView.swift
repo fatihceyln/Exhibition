@@ -27,9 +27,8 @@ struct UserProfileView: View {
                 .fill(Color.black.opacity(0.3))
                 .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.25)
                 .background {
-                    
                     if let photo = photo {
-                        PhotoImageView(photo: photo, showAttributes: false)
+                        PhotoImageView(photo: photo)  {}
                             .scaledToFill()
                             .opacity(0.6)
                             .blur(radius: 20)
@@ -144,26 +143,25 @@ struct UserProfileView: View {
                 LazyVStack {
                     ForEach(userProfileViewModel.photos) { photo in
                         ZStack {
-                            PhotoImageView(photo: photo, showAttributes: false)
-                                .overlay {
-                                    ZStack(alignment: .bottomLeading) {
-                                        LinearGradient(colors: [.black.opacity(0.3), .clear], startPoint: .bottom, endPoint: .top)
-                                        
-                                        if userProfileContent != .photos {
-                                            NavigationLink {
-                                                if let user = photo.user {
-                                                    UserProfileView(user: user)
-                                                }
-                                            } label: {
-                                                Text(photo.user?.name ?? "")
-                                                    .foregroundColor(.white)
-                                                    .font(.headline)
-                                                    .padding(.horizontal)
-                                                    .padding(.vertical, 5)
+                            PhotoImageView(photo: photo) {
+                                ZStack(alignment: .bottomLeading) {
+                                    LinearGradient(colors: [.black.opacity(0.3), .clear], startPoint: .bottom, endPoint: .top)
+                                    
+                                    if userProfileContent != .photos {
+                                        NavigationLink {
+                                            if let user = photo.user {
+                                                UserProfileView(user: user)
                                             }
+                                        } label: {
+                                            Text(photo.user?.name ?? "")
+                                                .foregroundColor(.white)
+                                                .font(.headline)
+                                                .padding(.horizontal)
+                                                .padding(.vertical, 5)
                                         }
                                     }
                                 }
+                            }
                         }
                         .frame(width: UIScreen.main.bounds.width, height: photo.height?.calculateHeight(width: photo.width ?? 0, height: photo.height ?? 0))
                         .onAppear {
@@ -190,26 +188,6 @@ struct UserProfileView: View {
         if let windowScene = scene as? UIWindowScene {
             windowScene.windows.first?.rootViewController?.present(activityVC, animated: true)
         }
-    }
-}
-
-struct CustomProfileLabelStyle: LabelStyle {
-    let titleFont: Font
-    
-    func makeBody(configuration: Configuration) -> some View {
-        HStack(alignment: .top) {
-            configuration.icon
-            
-            configuration.title
-                .font(titleFont)
-        }
-    }
-}
-
-extension View {
-    func customProfileLableStlye(titleFont: Font) -> some View {
-        self
-            .labelStyle(CustomProfileLabelStyle(titleFont: titleFont))
     }
 }
 

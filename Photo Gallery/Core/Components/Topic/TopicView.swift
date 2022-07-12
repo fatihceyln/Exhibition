@@ -62,7 +62,9 @@ struct TopicView: View {
                 
                 ForEach(topicViewModel.photos) { photo in
                     ZStack(alignment: .bottomLeading) {
-                        PhotoImageView(photo: photo)
+                        PhotoImageView(photo: photo) {
+                            PhotoAttributesView(photo: photo)
+                        }
                     }
                     .frame(width: UIScreen.main.bounds.width, height: photo.height?.calculateHeight(width: photo.width ?? 0, height: photo.height ?? 0))
                     .onAppear {

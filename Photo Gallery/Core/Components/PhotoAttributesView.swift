@@ -39,12 +39,6 @@ struct PhotoAttributesView: View {
 
                 
                 Spacer()
-                
-                Label {
-                    Text("\(photo.likes ?? 0)")
-                } icon: {
-                    Image(systemName: "heart.fill")
-                }
             }
             .padding()
         }

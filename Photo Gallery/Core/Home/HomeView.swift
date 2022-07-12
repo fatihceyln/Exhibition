@@ -118,11 +118,10 @@ struct HomeView: View {
             LazyVStack {
                 if let randomPhoto = homeViewModel.randomPhoto {
                     ZStack {
-                        PhotoImageView(photo: randomPhoto, showAttributes: false)
-                            .scaledToFill()
-                            .overlay {
-                                Color.black.opacity(0.3)
-                            }
+                        PhotoImageView(photo: randomPhoto) {
+                            Color.black.opacity(0.3)
+                        }
+                        .scaledToFill()
                         
                         VStack {
                             Text("Photos for everyone")
@@ -143,7 +142,9 @@ struct HomeView: View {
                 
                 ForEach(homeViewModel.photos) { photo in
                     ZStack(alignment: .bottomLeading) {
-                        PhotoImageView(photo: photo)
+                        PhotoImageView(photo: photo) {
+                            PhotoAttributesView(photo: photo)
+                        }
                     }
                     .frame(width: UIScreen.main.bounds.width, height: photo.height?.calculateHeight(width: photo.width ?? 0, height: photo.height ?? 0))
                     .onAppear {
