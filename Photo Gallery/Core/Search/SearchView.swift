@@ -15,6 +15,7 @@ struct SearchView: View {
     
     @StateObject private var searchViewModel: SearchViewModel = SearchViewModel()
     @State private var searchCategory: SearchCategory = .photos
+    @State private var searchText: String = ""
     
     var body: some View {
         VStack {
@@ -86,7 +87,24 @@ struct SearchView: View {
             LazyVStack {
                 ForEach(searchViewModel.photos) { photo in
                     ZStack(alignment: .bottomLeading) {
-                        PhotoImageView(photo: photo)
+                        PhotoImageView(photo: photo, showAttributes: false)
+                            .overlay {
+                                ZStack(alignment: .bottomLeading) {
+                                    LinearGradient(colors: [.black.opacity(0.3), .clear], startPoint: .bottom, endPoint: .top)
+                                    
+                                    NavigationLink {
+                                        if let user = photo.user {
+                                            UserProfileView(user: user)
+                                        }
+                                    } label: {
+                                        Text(photo.user?.name ?? "")
+                                            .foregroundColor(.white)
+                                            .font(.headline)
+                                            .padding(.horizontal)
+                                            .padding(.vertical, 5)
+                                    }
+                                }
+                            }
                     }
                     .frame(width: UIScreen.main.bounds.width, height: photo.height?.calculateHeight(width: photo.width ?? 0, height: photo.height ?? 0))
                     .onAppear {
@@ -128,8 +146,8 @@ struct SearchView: View {
                                                 .padding(.horizontal)
                                                 .padding(.vertical, 5)
                                         }
-
-
+                                        
+                                        
                                     }
                                 }
                         }
@@ -155,7 +173,7 @@ struct SearchView: View {
                 LazyHStack {
                     ForEach(BrowseByCategory.allCases, id: \.self) { category in
                         NavigationLink {
-                            
+                            CategoryPhotosView(searchViewModel: searchViewModel, category: category)
                         } label: {
                             Image(category.rawValue)
                                 .resizable()
@@ -183,20 +201,24 @@ struct SearchView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.gray)
             
-            TextField("Seach photos, collections, users", text: $searchViewModel.searchText)
+            TextField("Seach photos, collections, users", text: $searchText)
                 .disableAutocorrection(true)
+                .submitLabel(.done)
+                .onSubmit {
+                    searchViewModel.searchText = searchText
+                }
             
             Spacer()
             
             Button {
                 searchViewModel.searchText = ""
+                searchText = ""
             } label: {
                 Image(systemName: "xmark.circle")
                     .foregroundColor(.gray)
             }
             .opacity(searchViewModel.searchText.isEmpty ? 0.0 : 1.0)
             .animation(.easeInOut, value: searchViewModel.searchText)
-            
         }
         .padding(.horizontal)
         .padding(.vertical, 10)

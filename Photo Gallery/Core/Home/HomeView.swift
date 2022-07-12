@@ -38,7 +38,7 @@ struct HomeView: View {
                         }
                         .tabViewStyle(.page(indexDisplayMode: .never))
                     }
-                    .ignoresSafeArea()
+                    .edgesIgnoringSafeArea(.all)
                     
                     selectableTopics
                         .background {

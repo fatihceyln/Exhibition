@@ -24,7 +24,6 @@ class SearchViewModel: ObservableObject {
     
     private func addSubscribers() {
         $searchText
-            .debounce(for: 0.5, scheduler: DispatchQueue.main)
             .sink { [weak self] returnedSearchText in
                 self?.photos.removeAll()
                 self?.users.removeAll()

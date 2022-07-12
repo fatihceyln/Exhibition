@@ -13,8 +13,13 @@ class ApiURLs {
     static let key3 = "t1WzXoN8EXln8m6CpZJAhFXrZWsSMdiJ-1qN8yjkgn0"
     static let key4 = "HVp3fBJ3w1J6VPVIWpCKaz26lbQUkGTGReu9UC1Q0vg"
     static let key5 = "qnamd0u9ODrfvksWk7-2gGMgFdGrXzelZasatj9xolc"
+    static let key6 = "IjwiZW2FC6qKDswbxudoPBeu63PwYAaue4afZDxP_xA"
+    static let key7 = "8qOjanc2cqB2ljfqoj74yFVuDSfcFr3Ai3YRht5WmG0"
+    static let key8 = "EAy9yp30cserdj7GQ1aCgf53FswC2Ew3eoOc9LjFBHc"
+    static let key9 = "yB3OHAxcGxwZQtPy7oFcRt97svCQS-5bRMAQkCIkZl4"
+    static let key10 = "4NuVxa3zd78vv9xxi55S8vOCI9CmEDyapWPZv1Uy-jg"
     
-    static let apiKey: String = key2
+    static let apiKey: String = key9
 
     static let randomPhoto: String = "https://api.unsplash.com/photos/random?client_id=\(apiKey)"
     
@@ -30,7 +35,7 @@ class ApiURLs {
     }
     
     static func topic(id: String) -> String {
-        return "https://api.unsplash.com/topics/\(id)?client_id=HVp3fBJ3w1J6VPVIWpCKaz26lbQUkGTGReu9UC1Q0vg"
+        return "https://api.unsplash.com/topics/\(id)?client_id=\(apiKey)"
     }
     
     // MARK: LIST

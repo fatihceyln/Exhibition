@@ -123,7 +123,7 @@ struct UserProfileView: View {
             contentsOfUser
             
         }
-        .ignoresSafeArea()
+        .edgesIgnoringSafeArea(.top)
         .navigationBarHidden(true)
         .onChange(of: userProfileContent) { value in
             userProfileViewModel.photos.removeAll()
@@ -161,14 +161,13 @@ struct UserProfileView: View {
                                                     .padding(.horizontal)
                                                     .padding(.vertical, 5)
                                             }
-
                                         }
                                     }
                                 }
                         }
                         .frame(width: UIScreen.main.bounds.width, height: photo.height?.calculateHeight(width: photo.width ?? 0, height: photo.height ?? 0))
                         .onAppear {
-                            if userProfileViewModel.photos[userProfileViewModel.photos.count - 2].id == photo.id && userProfileViewModel.photos.isEmpty != true {
+                            if userProfileViewModel.photos.isEmpty != true && userProfileViewModel.photos[userProfileViewModel.photos.count - 1].id == photo.id {
                                 userProfileViewModel.userPhotoService.downloadPhotos()
                             }
                         }

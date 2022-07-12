@@ -58,8 +58,6 @@ struct TopicView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .frame(height: 250)
-                } else {
-                    EmptyView()
                 }
                 
                 ForEach(topicViewModel.photos) { photo in
@@ -77,7 +75,7 @@ struct TopicView: View {
                 }
             }
         }
-        .ignoresSafeArea(edges: .top)
+        .edgesIgnoringSafeArea(.top)
     }
 }
 

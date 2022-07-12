@@ -20,7 +20,6 @@ class TopicService {
     
     private func downloadTopic() {
         guard let url = URL(string: ApiURLs.topic(id: id)) else {return}
-        
         cancellable = NetworkingManager.shared.download(url: url)
             .subscribe(on: DispatchQueue.global(qos: .background))
             .decode(type: Topic.self, decoder: JSONDecoder())

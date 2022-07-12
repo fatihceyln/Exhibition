@@ -74,7 +74,7 @@ struct ProfileView: View {
                 }
             }
         }
-        .ignoresSafeArea()
+        .edgesIgnoringSafeArea(.top)
         .sheet(isPresented: $showAccountSettings) {
             AccountSettingsView(showAccountSettings: $showAccountSettings)
         }
