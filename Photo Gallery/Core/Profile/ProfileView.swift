@@ -9,15 +9,19 @@ import SwiftUI
 
 struct ProfileView: View {
     
+    @StateObject private var viewModel: ProfileViewModel = ProfileViewModel()
+    
     private let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @State private var showAccountSettings: Bool = false
     
     @State private var userProfileContent: UserProfileContent = .photos
     
+    @EnvironmentObject private var profileStore: ProfileStore
+    
     var body: some View {
         VStack {
             Rectangle()
-                .fill(Color.black.opacity(0.3))
+                .fill(Color.black.opacity(0.5))
                 .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.25)
                 .background {
                     Image("bg")
@@ -35,10 +39,21 @@ struct ProfileView: View {
                         .padding()
                 }
                 .overlay(alignment: .bottomLeading) {
-                    Text("Fatih Kilit")
-                        .font(.title)
-                        .bold()
-                        .padding()
+                    VStack(alignment: .leading) {
+                        Text(viewModel.profileModel.firstname + " " + viewModel.profileModel.lastname)
+                            .font(.title)
+                            .bold()
+                            .lineLimit(1)
+                        
+                        Text(viewModel.profileModel.username)
+                            .foregroundColor(.gray)
+                        
+                        if !viewModel.profileModel.location.isEmpty {
+                            Label(viewModel.profileModel.location, systemImage: "globe")
+                                .foregroundColor(.gray)
+                        }
+                    }
+                    .padding()
                 }
                 .overlay(alignment: .topLeading) {
                     Image(systemName: "chart.line.uptrend.xyaxis")
@@ -88,9 +103,15 @@ struct ProfileView: View {
                 }
             }
         }
+        .task({
+            await viewModel.getProfileModel()
+        })
         .edgesIgnoringSafeArea(.top)
         .sheet(isPresented: $showAccountSettings) {
-            AccountSettingsView(showAccountSettings: $showAccountSettings)
+            NavigationView {
+                AccountSettingsView(showAccountSettings: $showAccountSettings)
+            }
+            .environmentObject(viewModel)
         }
     }
     

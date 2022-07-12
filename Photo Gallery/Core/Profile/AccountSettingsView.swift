@@ -13,69 +13,69 @@ struct AccountSettingsView: View {
     
     var body: some View {
         VStack {
-            Section {
-                ZStack {
-                    Image("bg")
-                        .resizable()
-                        .scaledToFit()
-                        .blur(radius: 2) // always give blur before corner radius
-                        .cornerRadius(10)
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color.black.opacity(0.3))
-                        }
-                    
-                    Button {
-                        
-                    } label: {
-                        VStack {
-                            Image("pp")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 80, height: 80)
-                                .clipShape(Circle())
-                            
-                            Text("Change Profile Photo")
-                        }
-                        .foregroundColor(.white)
+            
+            ZStack {
+                Image("bg")
+                    .resizable()
+                    .scaledToFit()
+                    .blur(radius: 2) // always give blur before corner radius
+                    .cornerRadius(10)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color.black.opacity(0.3))
                     }
-
-                }
-                .padding()
                 
-            } header: {
-                Text("Settings")
-                    .headerProminence(.increased)
-                    .font(.title2)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .padding(.top)
-                    .overlay(alignment: .bottomLeading) {
-                        Button {
-                            showAccountSettings = false
-                        } label: {
-                            Image(systemName: "xmark")
-                        }
-                        .padding(.leading)
-                        .font(.title)
-                        .foregroundColor(.white)
+                Button {
+                    
+                } label: {
+                    VStack {
+                        Image("pp")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 80, height: 80)
+                            .clipShape(Circle())
+                        
+                        Text("Change Profile Photo")
                     }
+                    .foregroundColor(.white)
+                }
+                
             }
+            .padding()
             
             Form {
                 Section {
-                    Text("Edit Profile")
+                    NavigationLink {
+                        EditProfileView()
+                    } label: {
+                        Text("Edit Profile")
+                    }
                     Text("Change Password")
                     Text("Account")
                 }
             }
             Spacer()
         }
+        .toolbar(content: {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    showAccountSettings = false
+                } label: {
+                    Image(systemName: "xmark")
+                }
+                .foregroundColor(.white)
+            }
+        })
         .preferredColorScheme(.dark)
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Settings")
     }
 }
 
 struct AccountSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        AccountSettingsView(showAccountSettings: .constant(true))
+        NavigationView {
+            AccountSettingsView(showAccountSettings: .constant(true))
+        }
     }
 }
