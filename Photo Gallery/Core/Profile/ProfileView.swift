@@ -115,24 +115,30 @@ struct ProfileView: View {
                     
                 Spacer()
             case .likes:
-                ScrollView(showsIndicators: false) {
-                    LazyVStack {
-                        ForEach(likedPhotosStorage.likedPhotos) { photo in
-                            ZStack {
-                                PhotoImageView(photo: photo) {
-                                    ZStack(alignment: .bottomLeading) {
-                                        LinearGradient(colors: [.black.opacity(0.3), .clear], startPoint: .bottom, endPoint: .top)
-                                        
-                                        NavigationLink {
-                                            if let user = photo.user {
-                                                UserProfileView(user: user)
+                if likedPhotosStorage.likedPhotos.isEmpty {
+                    Spacer()
+                    Text("No likes")
+                    Spacer()
+                } else {
+                    ScrollView(showsIndicators: false) {
+                        LazyVStack {
+                            ForEach(likedPhotosStorage.likedPhotos) { photo in
+                                ZStack {
+                                    PhotoImageView(photo: photo) {
+                                        ZStack(alignment: .bottomLeading) {
+                                            LinearGradient(colors: [.black.opacity(0.3), .clear], startPoint: .bottom, endPoint: .top)
+                                            
+                                            NavigationLink {
+                                                if let user = photo.user {
+                                                    UserProfileView(user: user)
+                                                }
+                                            } label: {
+                                                Text(photo.user?.name ?? "")
+                                                    .foregroundColor(.white)
+                                                    .font(.headline)
+                                                    .padding(.horizontal)
+                                                    .padding(.vertical, 5)
                                             }
-                                        } label: {
-                                            Text(photo.user?.name ?? "")
-                                                .foregroundColor(.white)
-                                                .font(.headline)
-                                                .padding(.horizontal)
-                                                .padding(.vertical, 5)
                                         }
                                     }
                                 }
@@ -148,9 +154,6 @@ struct ProfileView: View {
                 Spacer()
             }
         }
-        .onAppear(perform: {
-            print(likedPhotosStorage.likedPhotos.count)
-        })
         .edgesIgnoringSafeArea(.top)
         .sheet(isPresented: $showAccountSettings) {
             NavigationView {
