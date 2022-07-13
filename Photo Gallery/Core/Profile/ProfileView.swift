@@ -95,7 +95,7 @@ struct ProfileView: View {
                     .font(.title2)
                 }
             
-            Picker("User content", selection: $userProfileContent.animation(.easeInOut)) {
+            Picker("User content", selection: $userProfileContent) {
                 Text("Photos")
                     .tag(UserProfileContent.photos)
                 
@@ -107,10 +107,25 @@ struct ProfileView: View {
             }
             .pickerStyle(SegmentedPickerStyle())
             
-            ScrollView(showsIndicators: false) {
-                LazyVGrid(columns: columns) {
+            switch userProfileContent {
+            case .photos:
+                Spacer()
+                
+                Text("No photos")
                     
+                Spacer()
+            case .likes:
+                ScrollView(showsIndicators: false) {
+                    LazyVGrid(columns: columns) {
+                        
+                    }
                 }
+            case .collections:
+                Spacer()
+                
+                Text("No Collections")
+                    
+                Spacer()
             }
         }
         .edgesIgnoringSafeArea(.top)

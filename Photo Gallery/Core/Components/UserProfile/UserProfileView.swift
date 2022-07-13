@@ -106,7 +106,7 @@ struct UserProfileView: View {
                     .padding()
                 }
             
-            Picker("asdasd", selection: $userProfileContent.animation(.easeInOut)) {
+            Picker("asdasd", selection: $userProfileContent) {
                 Text("Photos")
                     .tag(UserProfileContent.photos)
                 
@@ -138,7 +138,6 @@ struct UserProfileView: View {
             if userProfileViewModel.showNoContent == true {
                 Text("No \(userProfileContent.rawValue)")
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
-                    .animation(.none, value: userProfileContent)
             } else {
                 LazyVStack {
                     ForEach(userProfileViewModel.photos) { photo in
