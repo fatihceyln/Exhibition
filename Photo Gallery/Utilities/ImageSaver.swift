@@ -6,8 +6,18 @@
 //
 
 import SwiftUI
+import Photos
 
 class ImageSaver: NSObject {
+    
+    override init() {
+        super.init()
+        
+        PHPhotoLibrary.requestAuthorization(for: .addOnly) { _ in
+            
+        }
+    }
+    
     func writeToPhotoAlbum(image: UIImage) {
         UIImageWriteToSavedPhotosAlbum(image, self, #selector(saveCompletion), nil)
     }

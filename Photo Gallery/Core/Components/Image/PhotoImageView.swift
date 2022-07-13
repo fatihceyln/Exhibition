@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Photos
 
 struct PhotoImageView<Content: View>: View {
     let photo: Photo
@@ -20,6 +21,7 @@ struct PhotoImageView<Content: View>: View {
     @EnvironmentObject private var likedPhotosStorage: LikedPhotosStorage
     @Namespace private var namespace
     @State private var showInBottomTrailing: Bool = true
+    @State private var saveAnimation: Bool = false
     
     init(photo: Photo, @ViewBuilder overlayContent: () -> Content) {
         self.photo = photo
@@ -36,7 +38,7 @@ struct PhotoImageView<Content: View>: View {
                         if let id = photo.id, likedPhotosStorage.likedPhotoIds.contains(where: {$0 == id}) && !showInBottomTrailing {
                             Image(systemName: "heart.fill")
                                 .resizable()
-                                .foregroundColor(.red)
+                                .foregroundColor(Color("heartColor"))
                                 .frame(width: 30, height: 30)
                                 .foregroundColor(.red)
                                 .font(.title3)
@@ -49,7 +51,7 @@ struct PhotoImageView<Content: View>: View {
                         if let id = photo.id, likedPhotosStorage.likedPhotoIds.contains(where: {$0 == id}) && showInBottomTrailing {
                             Image(systemName: "heart.fill")
                                 .resizable()
-                                .foregroundColor(.red)
+                                .foregroundColor(Color("heartColor"))
                                 .frame(width: 30, height: 30)
                                 .foregroundColor(.red)
                                 .font(.title3)
@@ -58,6 +60,23 @@ struct PhotoImageView<Content: View>: View {
                                 .matchedGeometryEffect(id: "heart", in: namespace)
                         }
                     }
+                    .overlay(content: {
+                        if saveAnimation && PHPhotoLibrary.authorizationStatus(for: .addOnly) == .authorized {
+                            Image(systemName: "checkmark.circle.fill")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                                .foregroundColor(.green)
+                                .transition(.scale)
+                        } else if saveAnimation && PHPhotoLibrary.authorizationStatus(for: .addOnly) != .authorized {
+                            VStack {
+                                Image(systemName: "xmark.circle.fill")
+                                    .resizable()
+                                    .frame(width: 40, height: 40)
+                                    .foregroundColor(.red)
+                                    .transition(.scale)
+                            }
+                        }
+                    })
                     .overlay {
                         overlayContent
                     }
@@ -118,6 +137,13 @@ struct PhotoImageView<Content: View>: View {
                                 withAnimation {
                                     isComplete = false
                                     cornerRadius = 0
+                                    
+                                    saveAnimation = true
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                        withAnimation {
+                                            saveAnimation = false
+                                        }
+                                    }
                                 }
                             } label: {
                                 Text("Save")

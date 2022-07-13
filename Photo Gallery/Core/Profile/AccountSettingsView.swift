@@ -134,11 +134,13 @@ struct AccountSettingsView: View {
         .onChange(of: profileViewModel.profileModel.profileImageData, perform: { _ in
             Task {
                 await profileViewModel.saveProfileModel()
+                self.profileData = profileModel.profileData 
             }
         })
         .onChange(of: profileViewModel.profileModel.backgroundImageData, perform: { _ in
             Task {
                 await profileViewModel.saveProfileModel()
+                self.profileData = profileModel.profileData
             }
         })
         .sheet(isPresented: $showImagePicker, content: {
