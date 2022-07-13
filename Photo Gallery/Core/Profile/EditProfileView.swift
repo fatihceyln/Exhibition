@@ -9,8 +9,8 @@ import SwiftUI
 
 struct EditProfileView: View {
     
-    @EnvironmentObject private var viewModel: ProfileViewModel
     @Environment(\.dismiss) private var dismiss
+    @Binding var profileData: ProfileModel.ProfileData
     
     private var attributedString: AttributedString {
         var text = AttributedString("Edit your full information on unsplash.com")
@@ -26,17 +26,17 @@ struct EditProfileView: View {
     var body: some View {
         Form {
             Section {
-                TextField("First name", text: $viewModel.profileModel.firstname)
-                TextField("Last name", text: $viewModel.profileModel.lastname)
-                TextField("Username", text: $viewModel.profileModel.username)
-                TextField("Email", text: $viewModel.profileModel.email)
+                TextField("First name", text: $profileData.firstname)
+                TextField("Last name", text: $profileData.lastname)
+                TextField("Username", text: $profileData.username)
+                TextField("Email", text: $profileData.email)
             } header: {
                 Text("Profile")
             }
             
             Section {
-                TextField("Location", text: $viewModel.profileModel.location)
-                TextField("Website", text: $viewModel.profileModel.website)
+                TextField("Location", text: $profileData.location)
+                TextField("Website", text: $profileData.website)
             } header: {
                 Text("About")
             }
@@ -47,18 +47,6 @@ struct EditProfileView: View {
                     .font(.body)
             }
         }
-        .toolbar(content: {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    Task {
-                        await viewModel.saveProfileModel()
-                    }
-                } label: {
-                    Text("Save")
-                }
-                .foregroundColor(.white)
-            }
-        })
         .toolbar(content: {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
@@ -87,7 +75,7 @@ struct EditProfileView: View {
 
 struct EditProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfileView()
+        EditProfileView(profileData: .constant(ProfileModel.ProfileData()))
             .environmentObject(ProfileViewModel())
             .preferredColorScheme(.dark)
     }

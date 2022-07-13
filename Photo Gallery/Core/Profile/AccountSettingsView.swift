@@ -7,36 +7,95 @@
 
 import SwiftUI
 
+enum imagePickerOption {
+    case profile, background
+}
+
 struct AccountSettingsView: View {
     
+    @EnvironmentObject var profileViewModel: ProfileViewModel
     @Binding var showAccountSettings: Bool
+    @Binding var profileModel: ProfileModel
+    @State private var profileData: ProfileModel.ProfileData = ProfileModel.ProfileData()
+    
+    @State private var showImagePicker: Bool = false
+    
+    @State private var imagePickerOption: imagePickerOption = .profile
     
     var body: some View {
         VStack {
             
             ZStack {
-                Image("bg")
-                    .resizable()
-                    .scaledToFit()
-                    .blur(radius: 2) // always give blur before corner radius
-                    .cornerRadius(10)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.black.opacity(0.3))
-                    }
+                if let backgroundImage = profileViewModel.profileModel.getBackgroundImage() {
+                    Image(uiImage: backgroundImage)
+                        .resizable()
+                        .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.4)
+                        .scaledToFill()
+                        .blur(radius: 2) // always give blur before corner radius
+                        .cornerRadius(10)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.black.opacity(0.3))
+                        }
+                        .overlay(alignment: .topTrailing) {
+                            Button {
+                                imagePickerOption = .background
+                                showImagePicker.toggle()
+                            } label: {
+                                Text("Change Background Photo")
+                                    .padding(5)
+                                    .background {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(.ultraThinMaterial)
+                                    }
+                                    .foregroundColor(.white)
+                            }
+                            .padding(5)
+                        }
+                } else {
+                    LinearGradient(colors: [Color.black.opacity(0.5), Color.black.opacity(0.3)], startPoint: .bottom, endPoint: .top)
+                        .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.4)
+                        .scaledToFill()
+                        .cornerRadius(10)
+                        .overlay(alignment: .topTrailing) {
+                            Button {
+                                imagePickerOption = .background
+                                showImagePicker.toggle()
+                            } label: {
+                                Text("Change Background Photo")
+                                    .padding(5)
+                                    .background {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(.ultraThinMaterial)
+                                    }
+                                    .foregroundColor(.white)
+                            }
+                            .padding(5)
+                        }
+                }
                 
                 Button {
-                    
+                    imagePickerOption = .profile
+                    showImagePicker.toggle()
                 } label: {
                     VStack {
-                        Image("pp")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 80, height: 80)
-                            .clipShape(Circle())
+                        if let profileImage = profileViewModel.profileModel.getProfileImage() {
+                            Image(uiImage: profileImage)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 80, height: 80)
+                                .clipShape(Circle())
+                        } else {
+                            Image(systemName: "person.circle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 80, height: 80)
+                                .clipShape(Circle())
+                        }
                         
                         Text("Change Profile Photo")
                     }
+                    .padding(.vertical)
                     .foregroundColor(.white)
                 }
                 
@@ -46,7 +105,20 @@ struct AccountSettingsView: View {
             Form {
                 Section {
                     NavigationLink {
-                        EditProfileView()
+                        EditProfileView(profileData: $profileData)
+                            .toolbar(content: {
+                                ToolbarItem(placement: .navigationBarTrailing) {
+                                    Button {
+                                        profileModel.update(from: profileData)
+                                        Task {
+                                            await profileViewModel.saveProfileModel()
+                                        }
+                                    } label: {
+                                        Text("Save")
+                                    }
+                                    .foregroundColor(.white)
+                                }
+                            })
                     } label: {
                         Text("Edit Profile")
                     }
@@ -56,6 +128,27 @@ struct AccountSettingsView: View {
             }
             Spacer()
         }
+        .onAppear {
+            self.profileData = profileModel.profileData
+        }
+        .onChange(of: profileViewModel.profileModel.profileImageData, perform: { _ in
+            Task {
+                await profileViewModel.saveProfileModel()
+            }
+        })
+        .onChange(of: profileViewModel.profileModel.backgroundImageData, perform: { _ in
+            Task {
+                await profileViewModel.saveProfileModel()
+            }
+        })
+        .sheet(isPresented: $showImagePicker, content: {
+            switch imagePickerOption {
+            case .profile:
+                UIImagePickerControllerRepresentable(imageData: $profileViewModel.profileModel.profileImageData, showImagePicker: $showImagePicker)
+            case .background:
+                UIImagePickerControllerRepresentable(imageData: $profileViewModel.profileModel.backgroundImageData, showImagePicker: $showImagePicker)
+            }
+        })
         .toolbar(content: {
             ToolbarItem(placement: .navigationBarLeading) {
                 Button {
@@ -75,7 +168,7 @@ struct AccountSettingsView: View {
 struct AccountSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            AccountSettingsView(showAccountSettings: .constant(true))
+            AccountSettingsView(showAccountSettings: .constant(true), profileModel: .constant(ProfileModel()))
         }
     }
 }

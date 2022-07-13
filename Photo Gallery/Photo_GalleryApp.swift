@@ -10,6 +10,8 @@ import SwiftUI
 @main
 struct Photo_GalleryApp: App {
     
+    @StateObject private var profileViewModel: ProfileViewModel = ProfileViewModel()
+    
     init() {
         let appearance = UITabBarAppearance()
         appearance.backgroundEffect = UIBlurEffect(style: .systemUltraThinMaterial)
@@ -21,10 +23,17 @@ struct Photo_GalleryApp: App {
         UITabBar.appearance().scrollEdgeAppearance = appearance
     }
     
+    
+    
     var body: some Scene {
+        
         WindowGroup {
             HomeView()
                 .preferredColorScheme(.dark)
+                .environmentObject(profileViewModel)
+                .task {
+                    await profileViewModel.getProfileModel()
+                }
         }
     }
 }

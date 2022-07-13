@@ -9,14 +9,11 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @StateObject private var viewModel: ProfileViewModel = ProfileViewModel()
+    @EnvironmentObject private var profileViewModel: ProfileViewModel
     
     private let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @State private var showAccountSettings: Bool = false
-    
     @State private var userProfileContent: UserProfileContent = .photos
-    
-    @EnvironmentObject private var profileStore: ProfileStore
     
     var body: some View {
         VStack {
@@ -24,32 +21,45 @@ struct ProfileView: View {
                 .fill(Color.black.opacity(0.5))
                 .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height * 0.25)
                 .background {
-                    Image("bg")
-                        .resizable()
-                        .scaledToFill()
-                        .opacity(0.6)
-                        .blur(radius: 2)
+                    if let backgroundImage = profileViewModel.profileModel.getBackgroundImage() {
+                        Image(uiImage: backgroundImage)
+                            .resizable()
+                            .scaledToFill()
+                            .opacity(0.6)
+                            .blur(radius: 2)
+                    } else {
+                        LinearGradient(colors: [Color.gray.opacity(0.5), Color.gray.opacity(0.3)], startPoint: .bottom, endPoint: .top)
+                    }
                 }
                 .clipped()
                 .overlay(alignment: .bottomTrailing) {
-                    Image("pp")
-                        .resizable()
-                        .frame(width: 80, height: 80)
-                        .clipShape(Circle())
-                        .padding()
+                    if let profileImage = profileViewModel.profileModel.getProfileImage() {
+                        Image(uiImage: profileImage)
+                            .resizable()
+                            .frame(width: 80, height: 80)
+                            .clipShape(Circle())
+                            .padding()
+                    } else {
+                        Image(systemName: "person.circle.fill")
+                            .resizable()
+                            .frame(width: 80, height: 80)
+                            .scaledToFit()
+                            .clipShape(Circle())
+                            .padding()
+                    }
                 }
                 .overlay(alignment: .bottomLeading) {
                     VStack(alignment: .leading) {
-                        Text(viewModel.profileModel.firstname + " " + viewModel.profileModel.lastname)
+                        Text(profileViewModel.profileModel.firstname + " " + profileViewModel.profileModel.lastname)
                             .font(.title)
                             .bold()
                             .lineLimit(1)
                         
-                        Text(viewModel.profileModel.username)
+                        Text(profileViewModel.profileModel.username)
                             .foregroundColor(.gray)
                         
-                        if !viewModel.profileModel.location.isEmpty {
-                            Label(viewModel.profileModel.location, systemImage: "globe")
+                        if !profileViewModel.profileModel.location.isEmpty {
+                            Label(profileViewModel.profileModel.location, systemImage: "globe")
                                 .foregroundColor(.gray)
                         }
                     }
@@ -103,15 +113,11 @@ struct ProfileView: View {
                 }
             }
         }
-        .task({
-            await viewModel.getProfileModel()
-        })
         .edgesIgnoringSafeArea(.top)
         .sheet(isPresented: $showAccountSettings) {
             NavigationView {
-                AccountSettingsView(showAccountSettings: $showAccountSettings)
+                AccountSettingsView(showAccountSettings: $showAccountSettings, profileModel: $profileViewModel.profileModel)
             }
-            .environmentObject(viewModel)
         }
     }
     
@@ -134,6 +140,7 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
+            .environmentObject(ProfileViewModel())
             .preferredColorScheme(.dark)
     }
 }
