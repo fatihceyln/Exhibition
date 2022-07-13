@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct Photo_GalleryApp: App {
+struct ExhibitionApp: App {
     
     @StateObject private var profileViewModel: ProfileViewModel = ProfileViewModel()
     @StateObject private var likedPhotosStorage: LikedPhotosStorage = LikedPhotosStorage()

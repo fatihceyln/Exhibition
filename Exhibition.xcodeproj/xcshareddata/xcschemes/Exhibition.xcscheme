@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3D4617A0286F268A006E0E4B"
-               BuildableName = "Photo Gallery.app"
-               BlueprintName = "Photo Gallery"
-               ReferencedContainer = "container:Photo Gallery.xcodeproj">
+               BuildableName = "Exhibition.app"
+               BlueprintName = "Exhibition"
+               ReferencedContainer = "container:Exhibition.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -45,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3D4617A0286F268A006E0E4B"
-            BuildableName = "Photo Gallery.app"
-            BlueprintName = "Photo Gallery"
-            ReferencedContainer = "container:Photo Gallery.xcodeproj">
+            BuildableName = "Exhibition.app"
+            BlueprintName = "Exhibition"
+            ReferencedContainer = "container:Exhibition.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3D4617A0286F268A006E0E4B"
-            BuildableName = "Photo Gallery.app"
-            BlueprintName = "Photo Gallery"
-            ReferencedContainer = "container:Photo Gallery.xcodeproj">
+            BuildableName = "Exhibition.app"
+            BlueprintName = "Exhibition"
+            ReferencedContainer = "container:Exhibition.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
