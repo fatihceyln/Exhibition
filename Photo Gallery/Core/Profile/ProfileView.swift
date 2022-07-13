@@ -10,8 +10,8 @@ import SwiftUI
 struct ProfileView: View {
     
     @EnvironmentObject private var profileViewModel: ProfileViewModel
+    @EnvironmentObject private var likedPhotosStorage: LikedPhotosStorage
     
-    private let columns: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     @State private var showAccountSettings: Bool = false
     @State private var userProfileContent: UserProfileContent = .photos
     
@@ -116,8 +116,28 @@ struct ProfileView: View {
                 Spacer()
             case .likes:
                 ScrollView(showsIndicators: false) {
-                    LazyVGrid(columns: columns) {
-                        
+                    LazyVStack {
+                        ForEach(likedPhotosStorage.likedPhotos) { photo in
+                            ZStack {
+                                PhotoImageView(photo: photo) {
+                                    ZStack(alignment: .bottomLeading) {
+                                        LinearGradient(colors: [.black.opacity(0.3), .clear], startPoint: .bottom, endPoint: .top)
+                                        
+                                        NavigationLink {
+                                            if let user = photo.user {
+                                                UserProfileView(user: user)
+                                            }
+                                        } label: {
+                                            Text(photo.user?.name ?? "")
+                                                .foregroundColor(.white)
+                                                .font(.headline)
+                                                .padding(.horizontal)
+                                                .padding(.vertical, 5)
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             case .collections:
@@ -128,6 +148,9 @@ struct ProfileView: View {
                 Spacer()
             }
         }
+        .onAppear(perform: {
+            print(likedPhotosStorage.likedPhotos.count)
+        })
         .edgesIgnoringSafeArea(.top)
         .sheet(isPresented: $showAccountSettings) {
             NavigationView {
@@ -156,6 +179,7 @@ struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
             .environmentObject(ProfileViewModel())
+            .environmentObject(LikedPhotosStorage())
             .preferredColorScheme(.dark)
     }
 }

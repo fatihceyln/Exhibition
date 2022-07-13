@@ -35,7 +35,7 @@ struct PhotoImageView<Content: View>: View {
                 Image(uiImage: image)
                     .resizable()
                     .overlay {
-                        if let id = photo.id, likedPhotosStorage.likedPhotoIds.contains(where: {$0 == id}) && !showInBottomTrailing {
+                        if likedPhotosStorage.likedPhotos.contains(where: {$0.id == photo.id}) && !showInBottomTrailing {
                             Image(systemName: "heart.fill")
                                 .resizable()
                                 .foregroundColor(Color("heartColor"))
@@ -48,7 +48,7 @@ struct PhotoImageView<Content: View>: View {
                         }
                     }
                     .overlay(alignment: .bottomTrailing) {
-                        if let id = photo.id, likedPhotosStorage.likedPhotoIds.contains(where: {$0 == id}) && showInBottomTrailing {
+                        if likedPhotosStorage.likedPhotos.contains(where: {$0.id == photo.id}) && showInBottomTrailing {
                             Image(systemName: "heart.fill")
                                 .resizable()
                                 .foregroundColor(Color("heartColor"))
@@ -85,20 +85,18 @@ struct PhotoImageView<Content: View>: View {
                     .scaleEffect(isComplete ? 0.9 : 1)
                     .blur(radius: isComplete ? 5 : 0)
                     .onTapGesture(count: 2) {
-                        if let id = photo.id {
-                            withAnimation {
-                                likedPhotosStorage.updateLikedPhoto(id: id)
-                                if likedPhotosStorage.likedPhotoIds.contains(where: {$0 == id}) {
-                                    showInBottomTrailing = false
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                        withAnimation {
-                                            showInBottomTrailing = true
-                                        }
-                                    }
-                                } else {
+                        withAnimation {
+                            likedPhotosStorage.updateLikedPhoto(photo: photo)
+                            if likedPhotosStorage.likedPhotos.contains(where: {$0.id == photo.id}) {
+                                showInBottomTrailing = false
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                     withAnimation {
-                                        showInBottomTrailing = false
+                                        showInBottomTrailing = true
                                     }
+                                }
+                            } else {
+                                withAnimation {
+                                    showInBottomTrailing = false
                                 }
                             }
                         }

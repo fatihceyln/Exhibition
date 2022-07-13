@@ -36,8 +36,6 @@ struct PhotoAttributesView: View {
                     }
                     .foregroundColor(.white)
                 }
-
-                
                 Spacer()
             }
             .padding()
