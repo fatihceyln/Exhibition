@@ -18,6 +18,8 @@ struct PhotoImageView<Content: View>: View {
     @State private var cornerRadius: CGFloat = 0
     
     @EnvironmentObject private var likedPhotosStorage: LikedPhotosStorage
+    @Namespace private var namespace
+    @State private var showInBottomTrailing: Bool = true
     
     init(photo: Photo, @ViewBuilder overlayContent: () -> Content) {
         self.photo = photo
@@ -30,13 +32,30 @@ struct PhotoImageView<Content: View>: View {
             if let image = photoImageViewModel.image {
                 Image(uiImage: image)
                     .resizable()
-                    .overlay(alignment: .bottomTrailing) {
-                        if let id = photo.id, likedPhotosStorage.likedPhotoIds.contains(where: {$0 == id}) {
+                    .overlay {
+                        if let id = photo.id, likedPhotosStorage.likedPhotoIds.contains(where: {$0 == id}) && !showInBottomTrailing {
                             Image(systemName: "heart.fill")
+                                .resizable()
+                                .foregroundColor(.red)
+                                .frame(width: 30, height: 30)
                                 .foregroundColor(.red)
                                 .font(.title3)
                                 .padding()
                                 .transition(.scale)
+                                .matchedGeometryEffect(id: "heart", in: namespace)
+                        }
+                    }
+                    .overlay(alignment: .bottomTrailing) {
+                        if let id = photo.id, likedPhotosStorage.likedPhotoIds.contains(where: {$0 == id}) && showInBottomTrailing {
+                            Image(systemName: "heart.fill")
+                                .resizable()
+                                .foregroundColor(.red)
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(.red)
+                                .font(.title3)
+                                .padding()
+                                .transition(.move(edge: .bottom))
+                                .matchedGeometryEffect(id: "heart", in: namespace)
                         }
                     }
                     .overlay {
@@ -50,6 +69,18 @@ struct PhotoImageView<Content: View>: View {
                         if let id = photo.id {
                             withAnimation {
                                 likedPhotosStorage.updateLikedPhoto(id: id)
+                                if likedPhotosStorage.likedPhotoIds.contains(where: {$0 == id}) {
+                                    showInBottomTrailing = false
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                        withAnimation {
+                                            showInBottomTrailing = true
+                                        }
+                                    }
+                                } else {
+                                    withAnimation {
+                                        showInBottomTrailing = false
+                                    }
+                                }
                             }
                         }
                     }
