@@ -17,7 +17,7 @@ struct PhotoImageView<Content: View>: View {
     @State private var scale: CGFloat = 1
     @State private var cornerRadius: CGFloat = 0
     
-    @State private var showLike: Bool = false
+    @EnvironmentObject private var likedPhotosStorage: LikedPhotosStorage
     
     init(photo: Photo, @ViewBuilder overlayContent: () -> Content) {
         self.photo = photo
@@ -31,7 +31,7 @@ struct PhotoImageView<Content: View>: View {
                 Image(uiImage: image)
                     .resizable()
                     .overlay(alignment: .bottomTrailing) {
-                        if showLike {
+                        if let id = photo.id, likedPhotosStorage.likedPhotoIds.contains(where: {$0 == id}) {
                             Image(systemName: "heart.fill")
                                 .foregroundColor(.red)
                                 .font(.title3)
@@ -47,9 +47,10 @@ struct PhotoImageView<Content: View>: View {
                     .scaleEffect(isComplete ? 0.9 : 1)
                     .blur(radius: isComplete ? 5 : 0)
                     .onTapGesture(count: 2) {
-                        withAnimation(.spring()) {
-                            showLike.toggle()
-                            print("double")
+                        if let id = photo.id {
+                            withAnimation {
+                                likedPhotosStorage.updateLikedPhoto(id: id)
+                            }
                         }
                     }
                     .onTapGesture {
@@ -65,7 +66,7 @@ struct PhotoImageView<Content: View>: View {
                             cornerRadius = 20
                         }
                     } onPressingChanged: { isPressing in
-
+                        
                         if isPressing && !isComplete {
                             withAnimation(.easeInOut(duration: 0.3).delay(0.3)) {
                                 scale = 0.95

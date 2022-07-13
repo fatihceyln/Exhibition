@@ -11,6 +11,7 @@ import SwiftUI
 struct Photo_GalleryApp: App {
     
     @StateObject private var profileViewModel: ProfileViewModel = ProfileViewModel()
+    @StateObject private var likedPhotosStorage: LikedPhotosStorage = LikedPhotosStorage()
     
     init() {
         let appearance = UITabBarAppearance()
@@ -31,6 +32,7 @@ struct Photo_GalleryApp: App {
             HomeView()
                 .preferredColorScheme(.dark)
                 .environmentObject(profileViewModel)
+                .environmentObject(likedPhotosStorage)
                 .task {
                     await profileViewModel.getProfileModel()
                 }
