@@ -17,7 +17,7 @@ struct CategoryPhotosView: View {
         ZStack {
             ScrollView {
                 LazyVStack {
-                    ForEach(searchViewModel.categoryPhotos) { photo in
+                    ForEach(searchViewModel.photos) { photo in
                         ZStack(alignment: .bottomLeading) {
                             PhotoImageView(photo: photo) {
                                 ZStack(alignment: .bottomLeading) {

@@ -13,13 +13,11 @@ class ImageService {
     @Published var image: UIImage? = nil
     private var cancellable: AnyCancellable? = nil
     private let photo: Photo
-    private let options: ImageOptions
     
     private let cacheManager: CacheManager = CacheManager.shared
     
-    init(photo: Photo, options: ImageOptions) {
+    init(photo: Photo) {
         self.photo = photo
-        self.options = options
         getImage()
         //print("INIT service")
     }
@@ -29,17 +27,9 @@ class ImageService {
     }
     
     private func getImage() {
-        var photoId: String? = ""
         
-        switch options {
-        case .photo:
-            photoId = photo.id
-        case .profile:
-            photoId = photo.user?.id
-        }
-        
-        if let photoId = photoId, let cachedImage = cacheManager.getImage(id: photoId) {
-            print("RETRIEVED: \(photoId)")
+        if let id = photo.id, let cachedImage = cacheManager.getImage(id: id) {
+            print("RETRIEVED: \(id)")
             self.image = cachedImage
         } else {
             downloadImage()
@@ -48,19 +38,7 @@ class ImageService {
     
     private func downloadImage() {
         
-        var urlString: String? = ""
-        var photoId: String? = ""
-        
-        switch options {
-        case .photo:
-            urlString = photo.urls?.small
-            photoId = photo.id
-        case .profile:
-            urlString = photo.user?.profileImage?.large
-            photoId = photo.user?.id
-        }
-        
-        guard let urlString = urlString else {return}
+        guard let urlString = photo.urls?.small else {return}
         
         guard let url = URL(string: urlString) else {return}
         
@@ -78,9 +56,9 @@ class ImageService {
                 }
             }, receiveValue: { [weak self] returnedImage in
                 self?.image = returnedImage
-                if let photoId = photoId, let image = returnedImage {
-                    print("DOWNLOADED: \(photoId)")
-                    self?.cacheManager.addImage(image: image, id: photoId)
+                if let id = self?.photo.id, let image = returnedImage {
+                    print("DOWNLOADED: \(id)")
+                    self?.cacheManager.addImage(image: image, id: id)
                 }
                 self?.cancellable?.cancel()
             })

@@ -18,7 +18,7 @@ class PhotoImageViewModel: ObservableObject {
     
     init(photo: Photo) {
         self.photo = photo
-        self.service = ImageService(photo: photo, options: .photo)
+        self.service = ImageService(photo: photo)
         self.isLoading = true
         addSubscribers()
     }

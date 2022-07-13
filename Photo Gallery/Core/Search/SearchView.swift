@@ -22,7 +22,7 @@ struct SearchView: View {
             searchSection
             
             if searchViewModel.searchText.isEmpty {
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     browseByCategory
                     
                     discoverSection
@@ -82,7 +82,7 @@ struct SearchView: View {
     }
     
     private var searchPhotosView: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             LazyVStack {
                 ForEach(searchViewModel.photos) { photo in
                     ZStack(alignment: .bottomLeading) {

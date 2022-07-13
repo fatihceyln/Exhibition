@@ -7,16 +7,8 @@
 
 import Foundation
 
-enum SearchOption {
-    case search, category
-}
-
 enum UserProfileContent: String {
     case photos, likes, collections
-}
-
-enum ImageOptions {
-    case photo, profile
 }
 
 enum TopicEnum: String, Identifiable, CaseIterable {

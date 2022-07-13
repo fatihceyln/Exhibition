@@ -17,6 +17,8 @@ struct PhotoImageView<Content: View>: View {
     @State private var scale: CGFloat = 1
     @State private var cornerRadius: CGFloat = 0
     
+    @State private var showLike: Bool = false
+    
     init(photo: Photo, @ViewBuilder overlayContent: () -> Content) {
         self.photo = photo
         self.overlayContent = overlayContent()
@@ -28,6 +30,15 @@ struct PhotoImageView<Content: View>: View {
             if let image = photoImageViewModel.image {
                 Image(uiImage: image)
                     .resizable()
+                    .overlay(alignment: .bottomTrailing) {
+                        if showLike {
+                            Image(systemName: "heart.fill")
+                                .foregroundColor(.red)
+                                .font(.title3)
+                                .padding()
+                                .transition(.scale)
+                        }
+                    }
                     .overlay {
                         overlayContent
                     }
@@ -35,11 +46,18 @@ struct PhotoImageView<Content: View>: View {
                     .scaleEffect(scale)
                     .scaleEffect(isComplete ? 0.9 : 1)
                     .blur(radius: isComplete ? 5 : 0)
+                    .onTapGesture(count: 2) {
+                        withAnimation(.spring()) {
+                            showLike.toggle()
+                            print("double")
+                        }
+                    }
                     .onTapGesture {
                         withAnimation(.easeInOut(duration: 0.3)) {
                             isComplete = false
                             cornerRadius = 0
                         }
+                        print("aa")
                     }
                     .onLongPressGesture(minimumDuration: 0.6) {
                         withAnimation {
@@ -47,12 +65,13 @@ struct PhotoImageView<Content: View>: View {
                             cornerRadius = 20
                         }
                     } onPressingChanged: { isPressing in
-                        if isPressing && isComplete != true {
+
+                        if isPressing && !isComplete {
                             withAnimation(.easeInOut(duration: 0.3).delay(0.3)) {
                                 scale = 0.95
                                 cornerRadius = 20
                             }
-                        } else {
+                        } else if !isPressing && !isComplete {
                             withAnimation(.easeInOut(duration: 0.3)) {
                                 scale = 1
                                 cornerRadius = 0
@@ -82,6 +101,9 @@ struct PhotoImageView<Content: View>: View {
                             .transition(.opacity)
                             .padding([.top, .trailing])
                         }
+                    }
+                    .onDisappear {
+                        isComplete = false
                     }
                 
                 
