@@ -39,7 +39,6 @@ class SearchViewModel: ObservableObject {
             .store(in: &cancellables)
         
         searchPhotoService.$photos
-            .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] returnedPhotos in
                 for item in returnedPhotos {
@@ -51,7 +50,6 @@ class SearchViewModel: ObservableObject {
             .store(in: &cancellables)
         
         searchUserService.$users
-            .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { _ in
                 
