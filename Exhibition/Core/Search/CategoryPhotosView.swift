@@ -12,6 +12,7 @@ struct CategoryPhotosView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject var searchViewModel: SearchViewModel
     let category: BrowseByCategory
+    @State private var searchTextControl: Bool = true
     
     var body: some View {
         ZStack {
@@ -55,10 +56,10 @@ struct CategoryPhotosView: View {
         .navigationTitle(category.rawValue)
         .navigationBarBackButtonHidden(true)
         .onAppear(perform: {
-            searchViewModel.searchText = category.rawValue
-        })
-        .onDisappear(perform: {
-            searchViewModel.searchText = ""
+            if searchTextControl {
+                searchViewModel.searchText = category.rawValue
+                searchTextControl = false
+            }
         })
         .toolbar(content: {
             ToolbarItem(placement: .navigationBarLeading) {
