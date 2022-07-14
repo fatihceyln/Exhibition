@@ -18,8 +18,9 @@ class ApiURLs {
     static let key8 = "EAy9yp30cserdj7GQ1aCgf53FswC2Ew3eoOc9LjFBHc"
     static let key9 = "yB3OHAxcGxwZQtPy7oFcRt97svCQS-5bRMAQkCIkZl4"
     static let key10 = "4NuVxa3zd78vv9xxi55S8vOCI9CmEDyapWPZv1Uy-jg"
+    static let key11 = "a8nqY_6rsPfbWwUOI1rof4-BrOlW5p6jswyP450fYaY"
     
-    static let apiKey: String = key2
+    static let apiKey: String = key11
 
     static let randomPhoto: String = "https://api.unsplash.com/photos/random?client_id=\(apiKey)"
     

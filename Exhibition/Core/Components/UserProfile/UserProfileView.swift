@@ -143,25 +143,13 @@ struct UserProfileView: View {
                     ForEach(userProfileViewModel.photos) { photo in
                         ZStack {
                             PhotoImageView(photo: photo) {
-//                                ZStack(alignment: .bottomLeading) {
-//                                    LinearGradient(colors: [.black.opacity(0.3), .clear], startPoint: .bottom, endPoint: .top)
-//
-//                                    if userProfileContent != .photos {
-//                                        NavigationLink {
-//                                            if let user = photo.user {
-//                                                UserProfileView(user: user)
-//                                            }
-//                                        } label: {
-//                                            Text(photo.user?.name ?? "")
-//                                                .foregroundColor(.white)
-//                                                .font(.headline)
-//                                                .padding(.horizontal)
-//                                                .padding(.vertical, 5)
-//                                        }
-//                                    }
-//                                }
-                                
-                                PhotoAttributesView(photo: photo)
+                                ZStack(alignment: .bottomLeading) {
+                                    LinearGradient(colors: [.black.opacity(0.3), .clear], startPoint: .bottom, endPoint: .top)
+
+                                    if userProfileContent != .photos {
+                                        PhotoAttributesView(photo: photo)
+                                    }
+                                }
                             }
                         }
                         .frame(width: UIScreen.main.bounds.width, height: photo.height?.calculateHeight(width: photo.width ?? 0, height: photo.height ?? 0))

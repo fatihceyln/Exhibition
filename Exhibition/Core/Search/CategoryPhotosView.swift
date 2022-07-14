@@ -16,7 +16,7 @@ struct CategoryPhotosView: View {
     
     var body: some View {
         ZStack {
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 LazyVStack {
                     ForEach(searchViewModel.photos) { photo in
                         ZStack(alignment: .bottomLeading) {

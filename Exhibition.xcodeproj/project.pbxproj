@@ -55,7 +55,6 @@
 		3DD89C422871A875002547B5 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DD89C412871A875002547B5 /* Topic.swift */; };
 		3DE997DE2870BE0500703AA2 /* BlurHashDecode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE997DD2870BE0500703AA2 /* BlurHashDecode.swift */; };
 		3DEA44DA287EE803006BD426 /* LikedPhotosStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEA44D9287EE803006BD426 /* LikedPhotosStorage.swift */; };
-		3DEB056A2879D85F006B8C8C /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEB05692879D85F006B8C8C /* WebView.swift */; };
 		3DF2CBFE2871FE5C00DFB06D /* PhotoImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF2CBFD2871FE5C00DFB06D /* PhotoImageViewModel.swift */; };
 		3DF2CC002871FE7900DFB06D /* PhotoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF2CBFF2871FE7900DFB06D /* PhotoImageView.swift */; };
 /* End PBXBuildFile section */
@@ -110,7 +109,6 @@
 		3DD89C412871A875002547B5 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
 		3DE997DD2870BE0500703AA2 /* BlurHashDecode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurHashDecode.swift; sourceTree = "<group>"; };
 		3DEA44D9287EE803006BD426 /* LikedPhotosStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedPhotosStorage.swift; sourceTree = "<group>"; };
-		3DEB05692879D85F006B8C8C /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		3DF2CBFD2871FE5C00DFB06D /* PhotoImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoImageViewModel.swift; sourceTree = "<group>"; };
 		3DF2CBFF2871FE7900DFB06D /* PhotoImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -201,7 +199,6 @@
 				3DE997DD2870BE0500703AA2 /* BlurHashDecode.swift */,
 				3D4617BC286F2AAF006E0E4B /* ApiURLs.swift */,
 				3DC1C14228798AFD00F4CE3A /* CacheManager.swift */,
-				3DEB05692879D85F006B8C8C /* WebView.swift */,
 				3D2DFEAD287C056200FF62B8 /* Enums.swift */,
 				3D6243EF287D651B0066329F /* ImageSaver.swift */,
 				3D5152CB287DAE160047B4D8 /* ProfileStore.swift */,
@@ -449,7 +446,6 @@
 				3D6243EC287D55100066329F /* CategoryPhotosView.swift in Sources */,
 				3D0A03552874B43E005111FF /* PhotoService.swift in Sources */,
 				3D2533D6287ADEB100EC517D /* SearchView.swift in Sources */,
-				3DEB056A2879D85F006B8C8C /* WebView.swift in Sources */,
 				3D5152D3287DDFD60047B4D8 /* CustomStyles.swift in Sources */,
 				3D5152CC287DAE160047B4D8 /* ProfileStore.swift in Sources */,
 				3DB473932870489000448685 /* AccountSettingsView.swift in Sources */,
