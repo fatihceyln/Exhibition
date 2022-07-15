@@ -72,10 +72,12 @@ struct HomeView: View {
                     Label("Upload", systemImage: "plus.square.fill")
                 }
             
-            ProfileView()
-                .tabItem {
-                    Label("Profile", systemImage: "person.fill")
-                }
+            NavigationView {
+                ProfileView()
+            }
+            .tabItem {
+                Label("Profile", systemImage: "person.fill")
+            }
         }
     }
     

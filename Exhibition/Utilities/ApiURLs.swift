@@ -8,19 +8,19 @@
 import Foundation
 
 class ApiURLs {
-    static let key1 = "nJXLciTieEywZUX30IE76rxti1_GKx1FaS5OE-5MLRQ"
-    static let key2 = "ma8Zk0gXKPNNBN9q4m77BG657O7twbtoQY7y2c-2LQs"
-    static let key3 = "t1WzXoN8EXln8m6CpZJAhFXrZWsSMdiJ-1qN8yjkgn0"
-    static let key4 = "HVp3fBJ3w1J6VPVIWpCKaz26lbQUkGTGReu9UC1Q0vg"
-    static let key5 = "qnamd0u9ODrfvksWk7-2gGMgFdGrXzelZasatj9xolc"
-    static let key6 = "IjwiZW2FC6qKDswbxudoPBeu63PwYAaue4afZDxP_xA"
-    static let key7 = "8qOjanc2cqB2ljfqoj74yFVuDSfcFr3Ai3YRht5WmG0"
-    static let key8 = "EAy9yp30cserdj7GQ1aCgf53FswC2Ew3eoOc9LjFBHc"
-    static let key9 = "yB3OHAxcGxwZQtPy7oFcRt97svCQS-5bRMAQkCIkZl4"
-    static let key10 = "4NuVxa3zd78vv9xxi55S8vOCI9CmEDyapWPZv1Uy-jg"
-    static let key11 = "a8nqY_6rsPfbWwUOI1rof4-BrOlW5p6jswyP450fYaY"
+    static let key1 = "Ui7YxWIn_nz4Q0xQkf_8TGZherKgc-RjDxnEJIRjBEo"
+    static let key2 = "lBHYg0B8GpBTXcVCK6gejOoZV09ERrZhZApaERpqfIs"
+    static let key3 = "Dv8B7hG6iSq5B3ODoAyRryGyd70KSn703uqa6dMO85o"
+    static let key4 = "Ar67sXJBHLFYhDW7CQTsIl68JCjPi43GkOfUywYpmR0"
+    static let key5 = "xwgA3MYYzvAPe37zMtEaq1_K_i2L26LiJCoE7AkRdBE"
+    static let key6 = "TmS6Omp8oUt4pSEZyBXD7McD2y4enqv-LwiW7aVaMwQ"
+    static let key7 = "CfNvZ6l0EAlHZaz28AsL_yaoA5LNljYgN1zgZTq58nk"
+    static let key8 = "8zGUTt9KU0JGgG0-cwrY6xlod9HCicXJ52J-vX5I7I0"
+    static let key9 = "KUZqqo3FQR5FEmurFornb9R4gREoLAyEhHL8rZ1DJ8Q"
+    static let key10 = "IIolUW7rlPbjdWBSIheAcC5_3YH13yvtOVz05GRT1iI"
+    static let key11 = "x2qp6-y3jM-0jSniRFlw-RvGGmgWOTSFIHSnE1wDYvk"
     
-    static let apiKey: String = key11
+    static let apiKey: String = key2
 
     static let randomPhoto: String = "https://api.unsplash.com/photos/random?client_id=\(apiKey)"
     

@@ -72,6 +72,9 @@ struct SearchView: View {
                 }
             }
         }
+        .onAppear {
+            UITableView.appearance().showsVerticalScrollIndicator = false
+        }
         .listStyle(.plain)
     }
     
