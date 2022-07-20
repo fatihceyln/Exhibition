@@ -39,12 +39,12 @@ struct PhotoImageView<Content: View>: View {
                             Image(systemName: "heart.fill")
                                 .resizable()
                                 .foregroundColor(Color("heartColor"))
-                                .frame(width: 30, height: 30)
+                                .matchedGeometryEffect(id: "heart", in: namespace)
+                                .frame(width: 60, height: 60)
                                 .foregroundColor(.red)
                                 .font(.title3)
                                 .padding()
                                 .transition(.scale)
-                                .matchedGeometryEffect(id: "heart", in: namespace)
                         }
                     }
                     .overlay(alignment: .bottomTrailing) {
@@ -52,12 +52,12 @@ struct PhotoImageView<Content: View>: View {
                             Image(systemName: "heart.fill")
                                 .resizable()
                                 .foregroundColor(Color("heartColor"))
+                                .matchedGeometryEffect(id: "heart", in: namespace)
                                 .frame(width: 30, height: 30)
                                 .foregroundColor(.red)
                                 .font(.title3)
                                 .padding()
                                 .transition(.move(edge: .bottom))
-                                .matchedGeometryEffect(id: "heart", in: namespace)
                         }
                     }
                     .overlay(content: {
